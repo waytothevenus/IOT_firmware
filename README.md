@@ -14,6 +14,7 @@ With a fresh Raspberry Pi running RaspberryPi OS (Raspbian):
 - Clones this repo
 - Changes password to `pi` (Username is also `pi`)
 - Changes splash screen
+- Setup raspi-config
 - Enables SSH
 - Adds boot config
 - Adds boot script (`/boot/rc.local`)

@@ -26,7 +26,7 @@ sudo echo "pi:pi" > pass.txt
 sudo chpasswd < pass.txt
 
 # raspi-config
-sudo bash /home/pi/firmware/bin/first-run.sh
+sudo bash /home/pi/firmware/bin/raspi-config-setup.sh
 
 # Reboot
 sudo reboot

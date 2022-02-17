@@ -20,20 +20,3 @@ npm -v
 
 # Py dependencies
 sudo pip install -r /home/pi/firmware/requirements.txt
-
-# # Install remote desktop
-# sudo apt-get install realvnc-vnc-server
-
-# sudo apt install -y tightvncserver xrdp
-#
-
-# sudo -E leafpad /etc/samba/smb.conf &
-# [PiShare]
-#  comment=Pi Share
-#  path=/home/pi
-#  browseable=yes
-#  writeable=yes
-#  only guest=no
-#  create mask=0740
-#  directory mask=0750
-#  public=no
