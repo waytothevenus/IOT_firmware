@@ -34,6 +34,7 @@ const Index = () => {
         setActive(true);
       }, 2500);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -16,11 +16,24 @@ module.exports = withBundleAnalyzer({
   },
   async redirects() {
     return [
-      {
-        source: '/posts',
-        destination: '/posts/all',
-        permanent: false,
-      },
+      // {
+      //   source: '/posts',
+      //   destination: '/posts/all',
+      //   permanent: false,
+      // },
     ];
+  },
+  webpack: (config) => {
+    // Replace React with Preact only in client production build
+    // webpack: (config, { dev, isServer }) => {
+    // if (!dev && !isServer) {
+
+    Object.assign(config.resolve.alias, {
+      react: 'preact/compat',
+      'react-dom/test-utils': 'preact/test-utils',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/jsx-runtime',
+    });
+    return config;
   },
 });

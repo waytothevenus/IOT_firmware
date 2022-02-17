@@ -29,7 +29,12 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   }, [router.events]);
   return (
     <SessionProvider session={session}>
-      <NextNProgress startPosition={0.2} stopDelayMs={100} height={1} showOnShallow={false} />
+      <NextNProgress
+        startPosition={0.2}
+        stopDelayMs={100}
+        height={1}
+        showOnShallow={false}
+      />
       <Component {...pageProps} />
     </SessionProvider>
   );
