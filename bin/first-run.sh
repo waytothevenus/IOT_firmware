@@ -4,15 +4,16 @@
 
 
 # Install App Dependencies
-sudo apt-get update -y
+# sudo apt-get update -y
 
 # Communication
-sudo apt-get install samba
+# sudo apt-get install -y samba
 
 # Install Node
-# Use nodesource for a better node version
-curl -sL https://deb.nodesource.com/setup_17.x | bash -
-sudo apt-get install -y nodejs
+# # Use nodesource for a better node version
+# curl -sL https://deb.nodesource.com/setup_17.x | bash -
+# sudo apt-get install -y nodejs
+sudo bash /home/pi/firmware/bin/util/install-node.sh
 
 # List node version
 node -v
