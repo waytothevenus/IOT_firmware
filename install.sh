@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo apt-get update -y
+# sudo apt-get update -y
 
 # Install Git
 if ! command -v node &> /dev/null
@@ -8,7 +8,7 @@ then
 	sudo apt-get install -y git
 fi
 
-rm -rf /home/pi/firmware
+sudo rm -rf /home/pi/firmware
 sudo git clone https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
 
 sudo touch /boot/ssh
