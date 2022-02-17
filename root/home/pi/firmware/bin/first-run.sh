@@ -9,9 +9,6 @@ sudo apt-get update -y
 # Communication
 sudo apt-get install samba bonjour
 
-# Install Git
-sudo apt-get install -y git
-
 # Install Node
 # Use nodesource for a better node version
 curl -sL https://deb.nodesource.com/setup_17.x | bash -
@@ -24,9 +21,8 @@ npm -v
 # Py dependencies
 sudo pip install -r /home/pi/firmware/system/requirements.txt
 
-
-# Install remote desktop
-sudo apt-get install realvnc-vnc-server
+# # Install remote desktop
+# sudo apt-get install realvnc-vnc-server
 
 # sudo apt install -y tightvncserver xrdp
 #

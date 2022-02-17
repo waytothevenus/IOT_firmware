@@ -17,5 +17,5 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
-sudo bash /home/pi/bin/boot.sh
+sudo bash /home/pi/firmware/bin/boot.sh
 exit 0
