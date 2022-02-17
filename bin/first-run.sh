@@ -19,7 +19,7 @@ node -v
 npm -v
 
 # Py dependencies
-sudo pip install -r /home/pi/firmware/system/requirements.txt
+sudo pip install -r /home/pi/firmware/requirements.txt
 
 # # Install remote desktop
 # sudo apt-get install realvnc-vnc-server

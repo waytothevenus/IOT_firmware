@@ -2,4 +2,4 @@
 @pcmanfm --desktop --profile LXDE-pi
 @xscreensaver -no-splash
 @point-rpi
-@sudo /home/pi/init
+@sudo /home/pi/firmware/bin/init
