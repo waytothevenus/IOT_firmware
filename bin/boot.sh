@@ -17,5 +17,9 @@ then
 	sudo bash /home/pi/firmware/bin/first-run.sh
 fi
 
+# Initialize hardware
+echo "-*- Init -*-"
+sudo /home/pi/firmware/bin/init
+
 echo "-*- Startup -*-"
 sudo bash /home/pi/firmware/bin/startup.sh

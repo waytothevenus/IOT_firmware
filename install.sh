@@ -8,6 +8,10 @@ then
 	sudo apt-get install -y git
 fi
 
+# Set git config (rebase strategy)
+sudo git -C /home/pi/firmware/ config pull.rebase false
+
+# Clone repo
 sudo rm -rf /home/pi/firmware
 sudo git clone https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
 
