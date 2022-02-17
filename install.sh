@@ -3,7 +3,7 @@
 # sudo apt-get update -y
 
 # Install Git
-if ! command -v node &> /dev/null
+if ! command -v git &> /dev/null
 then
 	sudo apt-get install -y git
 fi
