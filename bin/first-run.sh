@@ -2,9 +2,9 @@
 
 # Config
 
+
 # Install App Dependencies
 sudo apt-get update -y
-
 
 # Communication
 sudo apt-get install samba bonjour
