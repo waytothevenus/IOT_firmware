@@ -1,11 +1,10 @@
 const config = {
   totalImages: 21,
-  site_name: 'shamedb',
+  site_name: 'iot-firmware',
   email: 'me@lacymorrow.com',
-  title: 'ShameDB',
-  tagline: 'Shedding light on abuses of authority.',
-  description:
-    'Our justice system is broken. Individuals and companies are able to commit crimes against humanity with only a slap on the wrist. Police are "fired" for weeks before silently being rehired. Naming and shaming these public entities is our defense to the lack of justice and media incompetence. Make them known, oust those who deserve justice.',
+  title: 'SmartCloud',
+  tagline: 'Firmware for iot scheduler',
+  description: 'Firmware for iot scheduler',
   locale: 'en',
   errorMessage: '',
 };

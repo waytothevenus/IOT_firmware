@@ -7,7 +7,7 @@
 sudo apt-get update -y
 
 # Communication
-sudo apt-get install samba bonjour
+sudo apt-get install samba
 
 # Install Node
 # Use nodesource for a better node version

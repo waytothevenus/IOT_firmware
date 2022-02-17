@@ -1,6 +1,6 @@
 import ContactForm from '../components/forms/ContactForm';
 import Meta from '../components/Meta';
-import Layout from '../templates/AltLayout';
+import Layout from '../templates/MainLayout';
 import config from '../utils/config';
 
 const Contact = () => {
