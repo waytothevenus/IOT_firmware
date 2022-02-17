@@ -8,7 +8,6 @@ if ! command -v node &> /dev/null
 then
     echo "-*- First Run -*-"
 	sudo bash /home/pi/firmware/bin/first_run.sh
-    exit
 fi
 
 echo "-*- Startup -*-"
