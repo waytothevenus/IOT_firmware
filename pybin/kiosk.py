@@ -360,7 +360,6 @@ if __name__ == '__main__':
         min_size=(320, 240),
         background_color='#F00',
         text_select=False,
-        debug=True
     )
 
     webview.start()
