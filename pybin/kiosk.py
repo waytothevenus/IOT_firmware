@@ -353,13 +353,13 @@ if __name__ == '__main__':
         js_api=api,
         width=800,
         height=600,
-        fullscreen=True,
         frameless=True,
-        on_top=True,
+        # on_top=False,
+        # fullscreen=False,
         resizable=False,
+        text_select=False,
         min_size=(320, 240),
         background_color='#F00',
-        text_select=False,
     )
 
     webview.start()
