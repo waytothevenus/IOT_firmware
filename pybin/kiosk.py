@@ -312,16 +312,16 @@ class Api:
     #     }
     #     return json.dumps(response)
 
-def listen_keys():
-    '''Listen to keyboard triple escape tap to go back.'''
-    try:
-        with keyboard.Listener(
-            on_release=on_release
-        ) as listener:
-            listener.join()
-    except:
-        # No support
-        return
+# def listen_keys():
+#     '''Listen to keyboard triple escape tap to go back.'''
+#     try:
+#         with keyboard.Listener(
+#             on_release=on_release
+#         ) as listener:
+#             listener.join()
+#     except:
+#         # No support
+#         return
 
 def change_url(api):
     global CURRENT_URL
@@ -354,3 +354,4 @@ if __name__ == '__main__':
         background_color='#F00',
         text_select=False,
     )
+		webview.start()
