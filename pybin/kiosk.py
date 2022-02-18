@@ -63,6 +63,7 @@ class Api:
 
         return hw_id
 
+
     def parse_react_json(self, react_json):
         try:
             p = ast.literal_eval(react_json)
@@ -73,6 +74,10 @@ class Api:
                 return ''
 
         return p
+
+    def log(message):
+        print(message)
+
 
     def init(self, params):
         response = {
