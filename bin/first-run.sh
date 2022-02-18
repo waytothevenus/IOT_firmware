@@ -22,4 +22,4 @@ node -v
 npm -v
 
 # Py dependencies
-sudo pip install -r /home/pi/firmware/requirements.txt
+sudo bash /home/pi/firmware/bin/util/pip-install.sh

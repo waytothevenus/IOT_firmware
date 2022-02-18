@@ -715,14 +715,14 @@ def change_url(api):
 
 if __name__ == '__main__':
     api = Api()
-    t = threading.Thread(target=listen_keys)
-    t.daemon = True
-    t.start()
+    # t = threading.Thread(target=listen_keys)
+    # t.daemon = True
+    # t.start()
 
-    if DEBUG:
-        t2 = threading.Thread(target=change_url, args=(api, ))
-        t2.daemon = True
-        t2.start()
+    # if DEBUG:
+    #     t2 = threading.Thread(target=change_url, args=(api, ))
+    #     t2.daemon = True
+    #     t2.start()
 
     webview.create_window(
         'Hackpack v4',
