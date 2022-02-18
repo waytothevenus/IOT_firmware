@@ -47,7 +47,7 @@ class Api:
 
         self.HW_ID = self._get_hw_id()
         if DEBUG:
-            print(self.HW_ID)
+            print('HWID: ' + self.HW_ID)
 
     def _get_hw_id(self):
         # Extract serial from cpuinfo file
@@ -353,7 +353,7 @@ if __name__ == '__main__':
         js_api=api,
         width=640,
         height=480,
-        frameless=True,
+        # frameless=True,
         # on_top=False,
         # fullscreen=False,
         resizable=False,
