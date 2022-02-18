@@ -2,6 +2,11 @@ import { SessionContextValue } from 'next-auth/react';
 
 export const generateRandom = (max: number) => Math.floor(Math.random() * max);
 
+export const getLocalStorage = (key: string) => {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : undefined;
+};
+
 export const getUserFromSession = (session: SessionContextValue) => {
   const { data } = session;
   // data?.user?.username ||

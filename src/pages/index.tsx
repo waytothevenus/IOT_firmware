@@ -14,7 +14,10 @@
 
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
+
 import Meta from '../components/Meta';
+import QRCode from '../components/QRCode';
 import { BigTitle } from '../styles/index.styles';
 import HomeLayout from '../templates/MainLayout';
 import config from '../utils/config';
@@ -55,19 +58,20 @@ const Index = () => {
         className="text-8xl sm:text-12xl"
         active={active}
         src={`/assets/images/shots/${imageIndex}.jpg`}
-        content={config.title}
+        content={'Welcome.'}
       >
-        {config.title}
+        Welcome.
       </BigTitle>
 
       <div className="text-center">
-        <p className="font-bold text-3xl mb-12">
-          Shedding light on{' '}
-          <span className="font-extrabold text-white bg-gray-900 p-1">
-            abuses of authority
-          </span>
-          .
-        </p>
+        <h1>SmartCloud ID</h1>
+        <h2>
+          <Link href="/wifi">
+            <a>WiFi Setup</a>
+          </Link>
+        </h2>
+
+        <QRCode />
       </div>
     </HomeLayout>
   );

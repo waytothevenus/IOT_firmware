@@ -9,6 +9,8 @@
 # Communication
 # sudo apt-get install -y samba
 
+sudo apt-get install --no-install-recommends chromium-browser midori
+
 # Install Node
 # # Use nodesource for a better node version
 # curl -sL https://deb.nodesource.com/setup_17.x | bash -

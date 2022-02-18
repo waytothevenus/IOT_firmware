@@ -7,6 +7,7 @@ const config = {
   description: 'Firmware for iot scheduler',
   locale: 'en',
   errorMessage: '',
+  fakeHardwareid: 'xxxxx',
 };
 
 config.errorMessage = `There was an error, please email <a href="mailto:${config.email}">${config.email}</a>`;

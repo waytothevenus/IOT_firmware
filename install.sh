@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# sudo systemctl enable getty@tty1.service
 # sudo apt-get update -y
 
 # Install Git
@@ -24,6 +25,7 @@ sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
 # Boot files
 sudo rm /etc/rc.local
 sudo cp -R /home/pi/firmware/root/etc/rc.local /etc
+
 
 # Set user password
 sudo echo "pi:pi" > pass.txt
