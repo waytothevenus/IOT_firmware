@@ -7,8 +7,8 @@ import NextNProgress from 'nextjs-progressbar';
 
 import * as ga from '../lib/ga';
 
-import 'antd/dist/antd.css';
 import '../styles/global.css';
+import 'antd/dist/antd.css';
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
   const router = useRouter();

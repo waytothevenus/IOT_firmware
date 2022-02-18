@@ -18,7 +18,7 @@ const Main = (props: MainProps) => {
     <PageWrapper className="p-2">
       {props.meta}
 
-      <div className="max-w-screen-xl w-full mx-auto relative">
+      <div className="max-w-screen-md w-full mx-auto relative">
         <div>
           {pathname !== '/' && (
             <div className="pb-6">
