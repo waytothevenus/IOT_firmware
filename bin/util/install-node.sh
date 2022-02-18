@@ -1,7 +1,7 @@
 # Install Node
+
 # sudo wget https://nodejs.org/download/release/v11.15.0/node-v11.15.0-linux-armv6l.tar.gz
 sudo wget https://unofficial-builds.nodejs.org/download/release/v16.14.0/node-v16.14.0-linux-armv6l.tar.gz
-
 sudo tar -xzf node-v16.14.0-linux-armv6l.tar.gz
 cd /home/pi/node-v16.14.0-linux-armv6l/
 sudo cp -R * /usr/local/
