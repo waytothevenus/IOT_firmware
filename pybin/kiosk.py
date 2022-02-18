@@ -227,11 +227,13 @@ class Api:
         return json.dumps(response)
 
     def getHardwareId(self, params):
-        if DEBUG:
-            print(params)
         response = {
             'message': self.HW_ID
         }
+
+        if DEBUG:
+            print('HWID' + response + '; ' + params)
+
         return json.dumps(response)
 
     # def getSignalMap(self, params):
@@ -350,16 +352,16 @@ if __name__ == '__main__':
         'Hackpack v4',
         url="https://lmorrow.ngrok.io/",
         # url="https://iot-cloud-lacymorrow.vercel.app/",
-        js_api=api,
-        width=640,
-        height=480,
-        # frameless=True,
-        # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00',
+            js_api=api,
+            width=640,
+            height=480,
+            # frameless=True,
+            # on_top=False,
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00',
     )
 
     webview.start(debug=DEBUG)
