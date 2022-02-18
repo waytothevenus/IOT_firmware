@@ -1,3 +1,3 @@
 import webview
 
-webview.create_window('Woah dude!', 'https://google.com')
+webview.create_window('SmartCloud', 'https://iot-cloud-lacymorrow.vercel.app/')

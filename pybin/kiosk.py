@@ -345,17 +345,22 @@ if __name__ == '__main__':
     #     t2.daemon = True
     #     t2.start()
 
+    # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         'Hackpack v4',
-        url="https://iot-cloud-lacymorrow.vercel.app/",
+        url="https://lmorrow.ngrok.io/",
+        # url="https://iot-cloud-lacymorrow.vercel.app/",
         js_api=api,
-        width=640,
-        height=480,
-        resizable=False,
+        width=800,
+        height=600,
         fullscreen=True,
+        frameless=True,
+        on_top=True,
+        resizable=False,
         min_size=(320, 240),
         background_color='#F00',
         text_select=False,
+        debug=True
     )
 
     webview.start()
