@@ -619,11 +619,11 @@ class Api:
 
         if u'message' in p:
             p_dict = p[u'message'].split(',')
-            print len(p_dict)
+            print(len(p_dict))
             if u'message' in p and len(p_dict) == 16:
                 cmd_dict = []
                 cmd_dict.append(p[u'message'])
-                print cmd_dict
+                print(cmd_dict)
                 self.call_light_sequence(cmd_dict)
                 response = {
                     'message': 'ok'
