@@ -31,7 +31,7 @@ STORAGE_FILE = "/home/pi/tmp/.iot_storage_"
 # LIGHTSOCKET_PACKET_LENGTH = 100
 
 
-DEBUG = False
+DEBUG = True
 client = None
 
 
