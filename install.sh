@@ -23,6 +23,8 @@ sudo cp -R /home/pi/firmware/root/boot/* /boot/
 sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
 sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
 
+sudo cp -R /home/pi/firmware/root/home/pi/* /home/pi
+
 # Boot files
 sudo rm /etc/rc.local
 sudo cp -R /home/pi/firmware/root/etc/rc.local /etc
