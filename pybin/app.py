@@ -1,15 +1,24 @@
 import json
+import ast
+import fcntl
 import os
 import random
+import socket
+import struct
+import subprocess
 import sys
 import time
 import webview
+
+# import threading
+# import collections
 
 """
 An example of serverless app architecture
 """
 
 DEBUG = False
+STORAGE_FILE = "/home/pi/iot_tmp/.iot_storage_"
 
 
 class Api():
@@ -32,7 +41,7 @@ class Api():
 
         self.HW_ID = self._get_hw_id()
         if DEBUG:
-            print('Initialized: ' + self.HW_ID)
+            self.log('Initialized: ' + self.HW_ID)
 
     def init(self, params):
         response = {
@@ -40,8 +49,65 @@ class Api():
         }
         return json.dumps(response)
 
-    def log(self, text):
-        print('[Cloud] %s' % text)
+    def get(self, params):
+        if DEBUG:
+            self.log(params)
+        p = self.parse_react_json(params)
+        if p == '':
+            response = {
+                'message': ''
+            }
+            return json.dumps(response)
+
+        if u'key' in p:
+            key = p[u'key']
+            # Read from file
+            try:
+                f = open(STORAGE_FILE + str(key), "r")
+                value = f.read()
+                f.close()
+                response = {
+                    'message': value
+                }
+            except:
+                response = {
+                    'message': 'Error'
+                }
+            return json.dumps(response)
+        response = {
+            'message': ''
+        }
+        return json.dumps(response)
+
+    def set(self, params):
+        if DEBUG:
+            self.log(params)
+        p = self.parse_react_json(params)
+        if p == '':
+            response = {
+                'message': ''
+            }
+            return json.dumps(response)
+
+        if u'key' in p and u'data' in p:
+            key = p[u'key']
+            # Write AuthToken to file
+            try:
+                f = open(STORAGE_FILE + str(key), "w")
+                f.write(str(p[u'data']))
+                f.close()
+                response = {
+                    'message': 'ok'
+                }
+            except:
+                response = {
+                    'message': ''
+                }
+        else:
+            response = {
+                'message': 'Error'
+            }
+        return json.dumps(response)
 
     def getHardwareId(self, params):
         response = {
@@ -49,8 +115,30 @@ class Api():
         }
 
         if DEBUG:
-            print('HWID' + response + '; ' + params)
+            self.log('HWID' + response + '; ' + params)
 
+        return json.dumps(response)
+
+    # Usage: get_ip_address('eth0') -> 192.160.0.110
+    def getIpAddress(self, params):
+        if DEBUG:
+            self.log(params)
+        ifname = 'wlan0'
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            ip = socket.inet_ntoa(fcntl.ioctl(
+                s.fileno(),
+                0x8915,  # SIOCGIFADDR
+                struct.pack('256s', ifname[:15])
+            )[20:24])
+            response = {
+                'message': str(ip)
+            }
+        except:
+            # Error - could not retrieve IP
+            response = {
+                'message': 'Could not receive IP address'
+            }
         return json.dumps(response)
 
     def getRandomNumber(self, params):
@@ -61,9 +149,77 @@ class Api():
         }
         return json.dumps(response)
 
+    def getWifiNetworks(self, params):
+        # sudo iwlist wlan0 scan
+        self.log('WIFI')
+        return False
+
+    def setWifi(self, ssid, password):
+        self.log('set WIFI')
+
+    def autoUpdate(self, params):
+        # Use subprocess.check_output if you expect a response
+        process = subprocess.check_output(
+            "sudo /home/pi/firmware/bin/util/update.sh",
+            stderr=subprocess.STDOUT,
+            shell=True
+        )
+        response = {
+            'message': str(process)
+        }
+        return json.dumps(response)
+
+    # def checkWifiConnection(self, params):
+    #     process = subprocess.check_output(
+    #         "sudo bash /home/pi/bin/check_wifi_wget.sh",
+    #         stderr=subprocess.STDOUT,
+    #         shell=True
+    #     )
+    #     response = {
+    #         'message': str(process),
+    #     }
+    #     return json.dumps(response)
+
+    def log(self, text):
+        print('[Cloud] %s' % text)
+
+    def longTime(self, params):
+        time.sleep(15)
+        response = {
+            'message': 'ok'
+        }
+        return json.dumps(response)
+
+    def parse_react_json(self, react_json):
+        try:
+            p = ast.literal_eval(react_json)
+        except:
+            try:
+                p = ast.literal_eval(json.dumps(react_json))
+            except:
+                return ''
+
+        return p
+
+    def removeAllTempStorage(self, params):
+        if DEBUG:
+            self.log(params)
+
+        try:
+            os.system('find /home/pi/iot_tmp -mindepth 1 -delete')
+        except:
+            pass
+
+        response = {
+            'message': 'ok'
+        }
+        return json.dumps(response)
+
     def toggleFullscreen(self):
         webview.windows[0].toggle_fullscreen()
 
+
+# wpa_cli - i wlan0 reconfigure
 
 if __name__ == '__main__':
     api = Api()
@@ -72,16 +228,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-        # url="",
-        js_api=api,
-        width=640,
-        height=350,
-        # frameless=True,
-        # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00'
+            # url="",
+            js_api=api,
+            width=640,
+            height=350,
+            # frameless=True,
+            # on_top=False,
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
