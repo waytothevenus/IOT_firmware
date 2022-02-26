@@ -368,4 +368,4 @@ if __name__ == '__main__':
             background_color='#F00',
     )
 
-    webview.start(debug=DEBUG)
+    webview.start(debug=DEBUG, gui='qt')
