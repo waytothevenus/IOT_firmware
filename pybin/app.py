@@ -41,7 +41,7 @@ class Api():
 
         self.HW_ID = self._get_hw_id()
         if DEBUG:
-            self.log('Initialized: ' + self.HW_ID)
+            print('Initialized: ' + self.HW_ID)
 
     def init(self, params):
         response = {
@@ -51,7 +51,7 @@ class Api():
 
     def get(self, params):
         if DEBUG:
-            self.log(params)
+            print(params)
         p = self.parse_react_json(params)
         if p == '':
             response = {
@@ -81,7 +81,7 @@ class Api():
 
     def set(self, params):
         if DEBUG:
-            self.log(params)
+            print(params)
         p = self.parse_react_json(params)
         if p == '':
             response = {
@@ -115,14 +115,14 @@ class Api():
         }
 
         if DEBUG:
-            self.log('HWID' + response + '; ' + params)
+            print('HWID' + response + '; ' + params)
 
         return json.dumps(response)
 
     # Usage: get_ip_address('eth0') -> 192.160.0.110
     def getIpAddress(self, params):
         if DEBUG:
-            self.log(params)
+            print(params)
         ifname = 'wlan0'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         try:
@@ -151,11 +151,11 @@ class Api():
 
     def getWifiNetworks(self, params):
         # sudo iwlist wlan0 scan
-        self.log('WIFI')
+        print('WIFI')
         return False
 
     def setWifi(self, ssid, password):
-        self.log('set WIFI')
+        print('set WIFI')
 
     def autoUpdate(self, params):
         # Use subprocess.check_output if you expect a response
@@ -203,7 +203,7 @@ class Api():
 
     def removeAllTempStorage(self, params):
         if DEBUG:
-            self.log(params)
+            print(params)
 
         try:
             os.system('find /home/pi/iot_tmp -mindepth 1 -delete')
