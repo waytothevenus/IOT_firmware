@@ -353,8 +353,8 @@ if __name__ == '__main__':
     # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         'IoT Cloud',
-        url="/home/pi/firmware/static/index.html",
-        # url="https://lmorrow.ngrok.io/",
+        # url="/home/pi/firmware/static/index.html",
+        url="https://lmorrow.ngrok.io/",
         # url="https://iot-cloud-lacymorrow.vercel.app/",
             js_api=api,
             width=640,
