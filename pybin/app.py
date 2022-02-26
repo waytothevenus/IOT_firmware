@@ -14,7 +14,7 @@ import webview
 # import collections
 
 """
-An example of serverless app architecture
+The pywebview front facing gui
 """
 
 DEBUG = False
