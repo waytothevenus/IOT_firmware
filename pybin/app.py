@@ -18,7 +18,7 @@ class Api():
 
         self.HW_ID = self._get_hw_id()
         if DEBUG:
-            print('HWID: ' + self.HW_ID)
+            print('Initialized: ' + self.HW_ID)
 
     def init(self, params):
         response = {
@@ -49,9 +49,6 @@ class Api():
 
 if __name__ == '__main__':
     api = Api()
-    webview.create_window('Smartcloud', 'assets/index.html',
+    webview.create_window('Smartcloud', '/home/pi/firmware/static/test/index.html',
                           js_api=api, min_size=(600, 450))
-    webview.start()
-
-webview.create_window(
-    'SmartCloud', url="/home/pi/firmware/static/test/index.html", debug=DEBUG)
+    webview.start(debug=DEBUG)
