@@ -51,4 +51,4 @@ if __name__ == '__main__':
     api = Api()
     webview.create_window('Smartcloud', '/home/pi/firmware/static/index.html',
                           js_api=api, min_size=(600, 450))
-    webview.start(debug=DEBUG)
+    webview.start(debug=DEBUG, http_server=True)
