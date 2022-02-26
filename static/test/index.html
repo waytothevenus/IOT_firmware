@@ -5,7 +5,9 @@
     <title>IOT</title>
   </head>
   <body>
-    <button id="btn" onclick="handleClick()">ACTION</button>
+    <button id="btn" onclick="window.pywebview.api.log('hi');handleClick();">
+      ACTION
+    </button>
     <div id="el"></div>
     <script type="text/javascript">
       (function () {
