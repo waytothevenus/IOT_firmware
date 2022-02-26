@@ -8,15 +8,17 @@
     <button id="btn" onclick="handleClick()">ACTION</button>
     <div id="el"></div>
     <script type="text/javascript">
-      var btn = document.getElementById("btn");
-      var el = document.getElementById("el");
-      var index = 0;
+      (function () {
+        var btn = document.getElementById("btn");
+        var el = document.getElementById("el");
+        var index = 0;
 
-      function handleClick() {
-        window.pywebview.api.log("hello " + index);
-        index += 1;
-        el.innerText = "index: " + index;
-      }
+        window.handleClick = function () {
+          window.pywebview.api.log("hello " + index);
+          index += 1;
+          el.innerText = "index: " + index;
+        };
+      })();
     </script>
   </body>
 </html>
