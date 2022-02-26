@@ -358,7 +358,7 @@ if __name__ == '__main__':
         # url="",
         js_api=api,
         width=640,
-        height=480,
+        height=350,
         # frameless=True,
         # on_top=False,
         # fullscreen=False,
