@@ -355,6 +355,7 @@ if __name__ == '__main__':
         'IoT Cloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
+        # url="",
         js_api=api,
         width=640,
         height=480,
