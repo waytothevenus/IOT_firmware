@@ -9,7 +9,7 @@ import webview
 An example of serverless app architecture
 """
 
-DEBUG = True
+DEBUG = False
 
 
 class Api():
