@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>IOT</title>
+  </head>
+  <body>
+    <button id="btn">ACTION</button>
+    <div id="el"></div>
+    <script type="text/javascript">
+      var btn = document.getElementById("btn");
+      var el = document.getElementById("el");
+      var index = 0;
+
+      btn.on("click", function () {
+        window.pywebview.api.log("hello " + index);
+        index += 1;
+      });
+    </script>
+  </body>
+</html>
