@@ -43,6 +43,16 @@ class Api():
     def log(self, text):
         print('[Cloud] %s' % text)
 
+    def getHardwareId(self, params):
+        response = {
+            'message': self.HW_ID
+        }
+
+        if DEBUG:
+            print('HWID' + response + '; ' + params)
+
+        return json.dumps(response)
+
     def getRandomNumber(self, params):
         randNum = random.randint(0, 100000000)
         message = 'Random IO: {0}'.format(randNum)
