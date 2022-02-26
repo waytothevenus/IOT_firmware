@@ -353,8 +353,8 @@ if __name__ == '__main__':
     # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         'IoT Cloud',
-        # url="/home/pi/firmware/static/index.html",
-        url="https://lmorrow.ngrok.io/",
+        url="/home/pi/firmware/static/index.html",
+        # url="https://lmorrow.ngrok.io/",
         js_api=api,
         width=640,
         height=480,
@@ -367,4 +367,4 @@ if __name__ == '__main__':
         background_color='#F00'
     )
 
-    webview.start(debug=DEBUG, gui='gtk', http_server=False)
+    webview.start(debug=DEBUG, gui='gtk', http_server=True)
