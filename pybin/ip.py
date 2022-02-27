@@ -12,7 +12,7 @@ import time
 import webview
 
 DEBUG = True
-TMP_DIR = '/home/pi/iot_tmp/'
+TMP_DIR = '/home/pi/'
 STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 
