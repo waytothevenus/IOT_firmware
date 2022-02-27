@@ -31,13 +31,15 @@ class Api():
         process = subprocess.check_output(
             ["sudo", "iwconfig", "wlan0"])
         info = process.decode("utf-8")
-        print(info)
-        groups = re.search('ESSID: "([\w ]+)" | Link Quality=(\d)+', info)
+        ssid = re.search(
+            'ESSID: "([\w ]+)"', info).group(1)
+        quality = re.search(
+            'Link Quality=(\d)+', info).group(1)
 
         response = {
             'message': {
-                'ssid': groups.group(1),
-                'quality': groups.group(2)
+                'ssid': ssid,
+                'quality': quality
             }
         }
         return response
