@@ -146,6 +146,13 @@ class Api():
         return json.dumps(response)
 
     def getWifiNetworks(self, params):
+		ip = '000.000.0.0'
+        try:
+            process = subprocess.check_output(["sudo", "iwlist", "wlan0", "scan"]).split()[0]
+            ip = process.decode("utf-8")
+        except:
+            ip = 'ERROR'
+        return ip
         # sudo iwlist wlan0 scan
         self.log('WIFI')
         return False
