@@ -36,12 +36,22 @@ class Api():
 
         return hw_id
 
+    def _get_ip_address(self):
+        ip = '000.000.0.0'
+        try:
+            process = subprocess.check_output(["hostname", "-I"]).split()[0]
+            ip = process.decode("utf-8")
+        except:
+            ip = 'ERROR'
+        return ip
+
     def __init__(self):
         self.default_variable = False
 
         self.HW_ID = self._get_hw_id()
+        self.IP_ADDRESS = self._get_ip_address()
         if DEBUG:
-            self.log('Initialized: ' + self.HW_ID)
+            self.log('Initialized: ' + self.HW_ID + self.IP_ADDRESS)
 
     def init(self, params):
         response = {
@@ -120,9 +130,9 @@ class Api():
         return json.dumps(response)
 
     def getIpAddress(self):
-        process = subprocess.check_output(["hostname", "-I"]).split()[0]
+        # process = subprocess.check_output(["hostname", "-I"]).split()[0]
         response = {
-            'message': process.decode("utf-8"),
+            'message': self.IP_ADDRESS,
         }
         if DEBUG:
             self.log('IP: ' + str(response))
@@ -216,16 +226,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-        # url="",
-        js_api=api,
-        width=640,
-        height=350,
-        # frameless=True,
-        # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00'
+            # url="",
+            js_api=api,
+            width=640,
+            height=350,
+            # frameless=True,
+            # on_top=False,
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
