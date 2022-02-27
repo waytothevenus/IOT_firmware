@@ -36,9 +36,16 @@ class Api():
 
         return hw_id
 
-    def __init__(self):
-        self.default_variable = False
+    def _get_ip_address(self):
+        ip = '000.000.0.0'
+        try:
+            process = subprocess.check_output(["hostname", "-I"]).split()[0]
+            ip = process.decode("utf-8")
+        except:
+            ip = 'ERROR'
+        return ip
 
+    def __init__(self):
         self.HW_ID = self._get_hw_id()
         # self.IP_ADDRESS = self._get_ip_address()
         if DEBUG:
