@@ -139,6 +139,9 @@ class Api():
         #     response = {
         #         'message': 'Could not receive IP address'
         #     }
+        if DEBUG:
+            self.log('IP: ' + str(ip))
+
         return json.dumps(response)
 
     def getRandomNumber(self, params):
@@ -228,16 +231,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-            # url="",
-            js_api=api,
-            width=640,
-            height=350,
-            # frameless=True,
-            # on_top=False,
-            # fullscreen=False,
-            resizable=False,
-            text_select=False,
-            min_size=(320, 240),
-            background_color='#F00'
+        # url="",
+        js_api=api,
+        width=640,
+        height=350,
+        # frameless=True,
+        # on_top=False,
+        # fullscreen=False,
+        resizable=False,
+        text_select=False,
+        min_size=(320, 240),
+        background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
