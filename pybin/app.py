@@ -115,32 +115,17 @@ class Api():
         }
 
         if DEBUG:
-            self.log('HWID' + response + '; ' + params)
+            self.log('HWID: ' + response + '; ' + params)
 
         return json.dumps(response)
 
-    # Usage: get_ip_address('eth0') -> 192.160.0.110
-    def getIpAddress(self, params):
-        if DEBUG:
-            self.log(params)
-        ifname = 'p2p-dev-wlan0'
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # try:
-        ip = socket.inet_ntoa(fcntl.ioctl(
-            s.fileno(),
-            0x8915,  # SIOCGIFADDR
-            struct.pack('256s', ifname[:15])
-        )[20:24])
+    def getIpAddress(self):
+        process = subprocess.check_output(["hostname", "-I"]).split()[0]
         response = {
-            'message': str(ip)
+            'message': process.decode("utf-8"),
         }
-        # except:
-        #     # Error - could not retrieve IP
-        #     response = {
-        #         'message': 'Could not receive IP address'
-        #     }
         if DEBUG:
-            self.log('IP: ' + str(ip))
+            self.log('IP: ' + str(response))
 
         return json.dumps(response)
 
