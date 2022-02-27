@@ -18,7 +18,7 @@ class Api():
     def getIpAddress(self, params):
         if DEBUG:
             print(params)
-        ifname = 'p2p-dev-wlan0'
+        ifname = 'wlan0'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # try:
         ip = socket.inet_ntoa(fcntl.ioctl(
