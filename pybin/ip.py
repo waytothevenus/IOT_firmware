@@ -12,7 +12,7 @@ import time
 import webview
 
 DEBUG = True
-TMP_DIR = '/home/pi/'
+TMP_DIR = '/home/pi/iot_tmp/'
 STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 
@@ -33,7 +33,9 @@ class Api():
             key = p[u'key']
             print('k: '+key)
             # Write AuthToken to file
-            f = open(STORAGE_FILE + str(key), "w+")
+            if not os.path.exists(TMP_DIR):
+                os.makedirs(TMP_DIR)
+            f = open(STORAGE_FILE + str(key), "w")
             f.write(str(p[u'data']))
             f.close()
             response = {

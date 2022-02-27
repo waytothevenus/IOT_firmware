@@ -107,6 +107,8 @@ class Api():
             print('k: '+key)
             # Write AuthToken to file
             try:
+                if not os.path.exists(TMP_DIR):
+                    os.makedirs(TMP_DIR)
                 f = open(STORAGE_FILE + str(key), "w")
                 f.write(str(p[u'data']))
                 f.close()
@@ -260,16 +262,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-            # url="",
-            js_api=api,
-            width=640,
-            height=350,
-            # frameless=True,
-            # on_top=False,
-            # fullscreen=False,
-            resizable=False,
-            text_select=False,
-            min_size=(320, 240),
-            background_color='#F00'
+        # url="",
+        js_api=api,
+        width=640,
+        height=350,
+        # frameless=True,
+        # on_top=False,
+        # fullscreen=False,
+        resizable=False,
+        text_select=False,
+        min_size=(320, 240),
+        background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
