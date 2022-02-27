@@ -17,7 +17,7 @@ class Api():
     # Usage: get`_ip_address('eth0') -> 192.160.0.110
     def getIpAddress(self):
         process = subprocess.check_output(
-            "hostname - -ip-address",
+            "hostname --ip-address",
             stderr=subprocess.STDOUT,
             shell=True
         )
