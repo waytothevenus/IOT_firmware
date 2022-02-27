@@ -123,7 +123,7 @@ class Api():
     def getIpAddress(self, params):
         if DEBUG:
             self.log(params)
-        ifname = 'wlan0'
+        ifname = 'p2p-dev-wlan0'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # try:
         ip = socket.inet_ntoa(fcntl.ioctl(
