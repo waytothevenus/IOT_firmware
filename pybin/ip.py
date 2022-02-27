@@ -18,7 +18,7 @@ class Api():
     def getIpAddress(self):
         process = subprocess.check_output(["hostname", "-I"]).split()[0]
         response = {
-            'message': str(process),
+            'message': process.decode("utf-8"),
         }
         if DEBUG:
             print('IP: ' + str(response))
