@@ -60,6 +60,7 @@ class Api():
         }
         return json.dumps(response)
 
+    # get({key})
     def get(self, params):
         if DEBUG:
             self.log(params)
@@ -72,7 +73,6 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
-            # Read from file
             try:
                 f = open(STORAGE_FILE + str(key), "r")
                 value = f.read()
@@ -80,6 +80,7 @@ class Api():
                 response = {
                     'message': value
                 }
+                self.log('Get ' + key + ': ' + value)
             except:
                 response = {
                     'message': 'Error'
@@ -88,14 +89,13 @@ class Api():
         response = {
             'message': ''
         }
-        print(response)
         return json.dumps(response)
 
+    # set({key, data})
     def set(self, params):
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        print(p)
         if p == '':
             response = {
                 'message': ''
@@ -103,18 +103,19 @@ class Api():
             return json.dumps(response)
 
         if u'key' in p and u'data' in p:
-            key = p[u'key']
-            print('k: '+key)
-            # Write AuthToken to file
+            key = str(p[u'key'])
+            data = str(p[u'data'])
             try:
+                # Create folder if needed
                 if not os.path.exists(TMP_DIR):
                     os.makedirs(TMP_DIR)
-                f = open(STORAGE_FILE + str(key), "w")
-                f.write(str(p[u'data']))
+                f = open(STORAGE_FILE + key, "w")
+                f.write(data)
                 f.close()
                 response = {
                     'message': 'ok'
                 }
+                self.log('Set ' + key + ': ' + data)
             except:
                 response = {
                     'message': ''
