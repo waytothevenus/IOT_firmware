@@ -130,10 +130,10 @@ class Api():
         return json.dumps(response)
 
     def getIpAddress(self, params):
-        # process = subprocess.check_output(["hostname", "-I"]).split()[0]
         response = {
-            'message': self.IP_ADDRESS,
+            'message': self._get_ip_address(),
         }
+
         if DEBUG:
             self.log('IP: ' + str(response))
 
