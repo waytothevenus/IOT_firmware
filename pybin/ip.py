@@ -18,7 +18,7 @@ class Api():
 
     def set(self, params):
         if DEBUG:
-            self.log(params)
+            print(params)
         p = self.parse_react_json(params)
         print(p)
         if p == '':
