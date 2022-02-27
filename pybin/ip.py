@@ -18,49 +18,19 @@ STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 class Api():
 
-    def set(self, params):
-        if DEBUG:
-            print(params)
-        p = self.parse_react_json(params)
-        print(p)
-        if p == '':
-            response = {
-                'message': ''
-            }
-            return json.dumps(response)
-
-        if u'key' in p and u'data' in p:
-            key = p[u'key']
-            print('k: '+key)
-            # Write AuthToken to file
-            if not os.path.exists(TMP_DIR):
-                os.makedirs(TMP_DIR)
-            f = open(STORAGE_FILE + str(key), "w")
-            f.write(str(p[u'data']))
-            f.close()
-            response = {
-                'message': 'ok'
-            }
-
-        else:
-            response = {
-                'message': 'Error'
-            }
+    def checkWifiConnection(self, params):
+        process = subprocess.check_output(
+            ["sudo", "bash", "/home/pi/bin/check_wifi_wget.sh"],
+            stderr=subprocess.STDOUT,
+            shell=True
+        )
+        response = {
+            'message': str(process),
+        }
         return json.dumps(response)
-
-    def parse_react_json(self, react_json):
-        try:
-            p = ast.literal_eval(react_json)
-        except:
-            try:
-                p = ast.literal_eval(json.dumps(react_json))
-            except:
-                return ''
-
-        return p
 
 
 if __name__ == '__main__':
     api = Api()
 
-    print(api.set({'key': 'ASD', 'data': 'hell'}))
+    print(api.checkWifiConnection({}))
