@@ -40,7 +40,7 @@ class Api():
                 'quality': groups.group(2)
             }
         }
-        return info
+        return response
 
 
 if __name__ == '__main__':
