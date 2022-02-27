@@ -5,7 +5,7 @@ class Api():
     # Usage: get`_ip_address('eth0') -> 192.160.0.110
     def getIpAddress(self, params):
         if DEBUG:
-            self.log(params)
+            print(params)
         ifname = 'p2p-dev-wlan0'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # try:
@@ -23,7 +23,7 @@ class Api():
         #         'message': 'Could not receive IP address'
         #     }
         if DEBUG:
-            self.log('IP: ' + str(ip))
+            print('IP: ' + str(ip))
 
         return json.dumps(response)
 
