@@ -72,7 +72,6 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
-            print(key.key)
             # Read from file
             try:
                 f = open(STORAGE_FILE + str(key), "r")
@@ -96,6 +95,7 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
+        print(p)
         if p == '':
             response = {
                 'message': ''
@@ -104,6 +104,7 @@ class Api():
 
         if u'key' in p and u'data' in p:
             key = p[u'key']
+            print('k: '+key)
             # Write AuthToken to file
             try:
                 f = open(STORAGE_FILE + str(key), "w")
@@ -194,8 +195,9 @@ class Api():
             ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
             stderr=subprocess.STDOUT
         )
+
         response = {
-            'message': str(process)
+            'message': str(process.decode("utf-8"))
         }
         return json.dumps(response)
 
