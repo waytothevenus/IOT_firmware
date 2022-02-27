@@ -16,18 +16,36 @@ DEBUG = True
 
 class Api():
 
-    def getWifiNetworks(self, params):
-        networks = 'Error'
-        ps = subprocess.Popen(
-            ('sudo', 'iwlist', 'wlan0', 'scan'), stdout=subprocess.PIPE)
-        process = subprocess.check_output(
-            ('grep', 'ESSID:'), stdin=ps.stdout)
-        ps.wait()
-        networks = process.decode("utf-8")
-        return networks
+    def set(self, params):
+        if DEBUG:
+            self.log(params)
+        p = self.parse_react_json(params)
+        print(p)
+        if p == '':
+            response = {
+                'message': ''
+            }
+            return json.dumps(response)
+
+        if u'key' in p and u'data' in p:
+            key = p[u'key']
+            print('k: '+key)
+            # Write AuthToken to file
+            f = open(STORAGE_FILE + str(key), "w")
+            f.write(str(p[u'data']))
+            f.close()
+            response = {
+                'message': 'ok'
+            }
+
+        else:
+            response = {
+                'message': 'Error'
+            }
+        return json.dumps(response)
 
 
 if __name__ == '__main__':
     api = Api()
 
-    print(api.getWifiNetworks({}))
+    print(api.set({'key': 'ASD'}))
