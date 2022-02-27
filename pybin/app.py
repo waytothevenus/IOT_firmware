@@ -157,8 +157,8 @@ class Api():
                 r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
             response = {
                 'message': {
-                    'ssid': groups.group(0),
-                    'quality': groups.group(1)
+                    'ssid': groups.group(1),
+                    'quality': groups.group(2)
                 }
             }
             return json.dumps(response)
