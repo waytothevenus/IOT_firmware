@@ -148,13 +148,17 @@ class Api():
         return json.dumps(response)
 
     def getWifiInfo(self, params):
-        info = '000.000.0.0'
+        info = 'Error'
         try:
             process = subprocess.check_output(
-                ["sudo", "iwconfig", "wlan0"]).split()[0]
+                ["sudo", "iwconfig", "wlan0"])
             info = process.decode("utf-8")
+
+            print(info)
             groups = re.search(
                 r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
+            print(groups.groups())
+
             response = {
                 'message': {
                     'ssid': groups.group(1),
@@ -164,8 +168,7 @@ class Api():
             return json.dumps(response)
 
         except:
-            info = 'ERROR'
-        return info
+            return info
 
     def getWifiNetworks(self, params):
         networks = '000.000.0.0'
