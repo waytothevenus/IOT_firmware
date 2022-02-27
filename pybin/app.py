@@ -154,10 +154,8 @@ class Api():
                 ["sudo", "iwconfig", "wlan0"])
             info = process.decode("utf-8")
 
-            print(info)
             groups = re.search(
                 r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
-            print(groups.groups())
 
             response = {
                 'message': {
