@@ -25,6 +25,15 @@ sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
 
 sudo cp -R /home/pi/firmware/root/home/pi/* /home/pi
 
+# # Copy shell scripts
+# echo '> Add shell files'
+# sudo cp -r /home/pi/hackpack-server/bin/ /home/pi/
+
+
+# # Set Permissions
+# echo '> Set shell permissions'
+# sudo chmod 755 -R /home/pi/bin/
+
 # Boot files
 sudo rm /etc/rc.local
 sudo cp -R /home/pi/firmware/root/etc/rc.local /etc

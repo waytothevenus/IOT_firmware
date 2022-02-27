@@ -192,28 +192,48 @@ class Api():
     def setWifi(self, ssid, password):
         self.log('set WIFI')
 
-    def update(self, params):
-        # Use subprocess.check_output if you expect a response
+    def checkWifiConnection(self, params):
         process = subprocess.check_output(
-            ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
-            stderr=subprocess.STDOUT
-        )
-
+            ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
+            stderr=subprocess.STDOUT)
         response = {
-            'message': str(process.decode("utf-8"))
+            'message': str(process),
         }
         return json.dumps(response)
 
-    # def checkWifiConnection(self, params):
-    #     process = subprocess.check_output(
-    #         "sudo bash /home/pi/bin/check_wifi_wget.sh",
-    #         stderr=subprocess.STDOUT,
-    #         shell=True
-    #     )
-    #     response = {
-    #         'message': str(process),
-    #     }
-    #     return json.dumps(response)
+    def connectWifiNetwork(self, params):
+        if DEBUG:
+            self.log(params)
+        p = self.parse_react_json(params)
+        if p == '':
+            response = {
+                'message': ''
+            }
+            return json.dumps(response)
+
+        if u'ssid' in p and u'password' in p:
+            ssid = str(p[u'ssid'])
+            password = str(p[u'password'])
+            try:
+                # Create folder if needed
+                if not os.path.exists(TMP_DIR):
+                    os.makedirs(TMP_DIR)
+                f = open(STORAGE_FILE + ssid, "w")
+                f.write(password)
+                f.close()
+                response = {
+                    'message': 'ok'
+                }
+                self.log('Set ' + ssid + ': ' + password)
+            except:
+                response = {
+                    'message': ''
+                }
+        else:
+            response = {
+                'message': 'Error'
+            }
+        return json.dumps(response)
 
     def log(self, text):
         print('[Cloud] %s' % text)
@@ -253,8 +273,20 @@ class Api():
     def toggleFullscreen(self):
         webview.windows[0].toggle_fullscreen()
 
+    def update(self, params):
+        # Use subprocess.check_output if you expect a response
+        process = subprocess.check_output(
+            ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
+            stderr=subprocess.STDOUT
+        )
+
+        response = {
+            'message': str(process.decode("utf-8"))
+        }
+        return json.dumps(response)
 
 # wpa_cli - i wlan0 reconfigure
+
 
 if __name__ == '__main__':
     api = Api()
@@ -263,16 +295,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-        # url="",
-        js_api=api,
-        width=640,
-        height=350,
-        # frameless=True,
-        # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00'
+            # url="",
+            js_api=api,
+            width=640,
+            height=350,
+            # frameless=True,
+            # on_top=False,
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)

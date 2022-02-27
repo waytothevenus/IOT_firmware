@@ -20,10 +20,8 @@ class Api():
 
     def checkWifiConnection(self, params):
         process = subprocess.check_output(
-            ["sudo", "bash", "/home/pi/bin/check_wifi_wget.sh"],
-            stderr=subprocess.STDOUT,
-            shell=True
-        )
+            ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
+            stderr=subprocess.STDOUT)
         response = {
             'message': str(process),
         }
