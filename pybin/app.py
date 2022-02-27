@@ -169,14 +169,16 @@ class Api():
             return info
 
     def getWifiNetworks(self, params):
-        networks = '000.000.0.0'
+        networks = 'Error'
         try:
+            ps = subprocess.Popen(
+                ('sudo', 'iwlist', 'wlan0', 'scan'), stdout=subprocess.PIPE)
             process = subprocess.check_output(
-                ["sudo", "iwlist", "wlan0", "scan"]).split()[0]
+                ('grep', 'ESSID:'), stdin=ps.stdout)
+            ps.wait()
             networks = process.decode("utf-8")
         except:
-            networks = 'ERROR'
-        return networks
+            return networks
 
     def setWifi(self, ssid, password):
         self.log('set WIFI')
@@ -252,16 +254,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-            # url="",
-            js_api=api,
-            width=640,
-            height=350,
-            # frameless=True,
-            # on_top=False,
-            # fullscreen=False,
-            resizable=False,
-            text_select=False,
-            min_size=(320, 240),
-            background_color='#F00'
+        # url="",
+        js_api=api,
+        width=640,
+        height=350,
+        # frameless=True,
+        # on_top=False,
+        # fullscreen=False,
+        resizable=False,
+        text_select=False,
+        min_size=(320, 240),
+        background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
