@@ -22,7 +22,7 @@ class Api():
             shell=True
         )
         response = {
-            'message': str(process),
+            'message': str(process.decode("utf-8")),
         }
         if DEBUG:
             print('IP: ' + str(response))
