@@ -51,7 +51,7 @@ class Api():
         self.HW_ID = self._get_hw_id()
         self.IP_ADDRESS = self._get_ip_address()
         if DEBUG:
-            self.log('Initialized: ' + self.HW_ID + self.IP_ADDRESS)
+            self.log('Initialized: ' + self.HW_ID + ' ' + self.IP_ADDRESS)
 
     def init(self, params):
         response = {
@@ -129,7 +129,7 @@ class Api():
 
         return json.dumps(response)
 
-    def getIpAddress(self):
+    def getIpAddress(self, params):
         # process = subprocess.check_output(["hostname", "-I"]).split()[0]
         response = {
             'message': self.IP_ADDRESS,
