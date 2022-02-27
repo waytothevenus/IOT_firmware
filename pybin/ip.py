@@ -28,23 +28,19 @@ class Api():
 
     def getWifiInfo(self, params):
         info = '000.000.0.0'
-        try:
-            process = subprocess.check_output(
-                ["sudo", "iwconfig", "wlan0"])
-            info = process.decode("utf-8")
-            groups = re.match(
-                r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
-            response = {
-                'message': {
-                    'ssid': groups.group(1),
-                    'quality': groups.group(2)
-                }
-            }
-            return json.dumps(response)
 
-        except:
-            info = 'ERROR'
-        return info
+        process = subprocess.check_output(
+            ["sudo", "iwconfig", "wlan0"])
+        info = process.decode("utf-8")
+        groups = re.match(
+            r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
+        response = {
+            'message': {
+                'ssid': groups.group(1),
+                'quality': groups.group(2)
+            }
+        }
+        return json.dumps(response)
 
 
 if __name__ == '__main__':
