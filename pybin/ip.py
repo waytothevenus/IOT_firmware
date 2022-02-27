@@ -1,3 +1,9 @@
+from pybin.app import DEBUG
+
+
+DEBUG = True
+
+
 class Api():
     # Usage: get`_ip_address('eth0') -> 192.160.0.110
     def getIpAddress(self, params):
