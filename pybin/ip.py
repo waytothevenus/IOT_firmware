@@ -1,3 +1,4 @@
+import re
 import json
 import ast
 import fcntl
@@ -25,8 +26,25 @@ class Api():
 
         return json.dumps(response)
 
+    def getWifiInfo(self, params):
+        info = '000.000.0.0'
+        process = subprocess.check_output(
+            ["sudo", "iwconfig", "wlan0"]).split()[0]
+        info = process.decode("utf-8")
+        print(info)
+        groups = re.search('ESSID: "([\w ]+)" | Link Quality=(\d)+', info)
+        print(groups)
+
+        response = {
+            'message': {
+                'ssid': groups.group(1),
+                'quality': groups.group(2)
+            }
+        }
+        return info
+
 
 if __name__ == '__main__':
     api = Api()
 
-    print(api.getIpAddress())
+    print(api.getWifiInfo())
