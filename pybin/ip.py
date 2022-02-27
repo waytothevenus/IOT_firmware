@@ -28,4 +28,4 @@ class Api():
 if __name__ == '__main__':
     api = Api()
 
-    print(api.getIpAddress())
+    print(api.getIpAddress('asd'))
