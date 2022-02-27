@@ -33,7 +33,7 @@ class Api():
             key = p[u'key']
             print('k: '+key)
             # Write AuthToken to file
-            f = open(STORAGE_FILE + str(key), "w")
+            f = open(STORAGE_FILE + str(key), "a")
             f.write(str(p[u'data']))
             f.close()
             response = {
