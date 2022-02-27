@@ -59,4 +59,4 @@ class Api():
 if __name__ == '__main__':
     api = Api()
 
-    print(api.set({'key': 'ASD'}))
+    print(api.set({'key': 'ASD', 'data': 'hell'}))
