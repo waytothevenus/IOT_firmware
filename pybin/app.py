@@ -116,7 +116,7 @@ class Api():
         }
 
         if DEBUG:
-            self.log('HWID: ' + response + '; ' + str(params))
+            self.log('HWID: ' + response)
 
         return json.dumps(response)
 
