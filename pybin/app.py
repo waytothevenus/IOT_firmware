@@ -153,11 +153,12 @@ class Api():
             process = subprocess.check_output(
                 ["sudo", "iwconfig", "wlan0"]).split()[0]
             info = process.decode("utf-8")
-            groups = re.search('ESSID: "([\w ]+)" | Link Quality=(\d)+', info)
+            groups = re.search(
+                r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info).groups()
             response = {
                 'message': {
-                    'ssid': groups.group(1),
-                    'quality': groups.group(2)
+                    'ssid': groups.group(0),
+                    'quality': groups.group(1)
                 }
             }
             return json.dumps(response)
