@@ -72,7 +72,7 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
-            print(key)
+            print(key.key)
             # Read from file
             try:
                 f = open(STORAGE_FILE + str(key), "r")
@@ -89,6 +89,7 @@ class Api():
         response = {
             'message': ''
         }
+        print(response)
         return json.dumps(response)
 
     def set(self, params):
@@ -191,8 +192,7 @@ class Api():
         # Use subprocess.check_output if you expect a response
         process = subprocess.check_output(
             ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
-            stderr=subprocess.STDOUT,
-            shell=True
+            stderr=subprocess.STDOUT
         )
         response = {
             'message': str(process)
