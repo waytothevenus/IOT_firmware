@@ -20,13 +20,10 @@ class Api():
         networks = 'Error'
         ps = subprocess.Popen(
             ('sudo', 'iwlist', 'wlan0', 'scan'), stdout=subprocess.PIPE)
-        print(ps)
         process = subprocess.check_output(
             ('grep', 'ESSID:'), stdin=ps.stdout)
-        print(process)
         ps.wait()
         networks = process.decode("utf-8")
-        print(networks)
         return networks
 
 
