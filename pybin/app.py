@@ -17,7 +17,7 @@ import webview
 The pywebview front facing gui
 """
 
-DEBUG = False
+DEBUG = True
 STORAGE_FILE = "/home/pi/iot_tmp/.iot_storage_"
 
 
