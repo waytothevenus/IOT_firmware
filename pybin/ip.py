@@ -1,6 +1,3 @@
-from pybin.app import DEBUG
-
-
 DEBUG = True
 
 
