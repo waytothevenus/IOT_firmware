@@ -30,7 +30,7 @@ class Api():
         info = '000.000.0.0'
         try:
             process = subprocess.check_output(
-                ["sudo", "iwconfig", "wlan0"]).split()[0]
+                ["sudo", "iwconfig", "wlan0"])
             info = process.decode("utf-8")
             groups = re.match(
                 r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
