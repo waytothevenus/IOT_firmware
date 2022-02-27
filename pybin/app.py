@@ -125,20 +125,20 @@ class Api():
             self.log(params)
         ifname = 'wlan0'
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        try:
-            ip = socket.inet_ntoa(fcntl.ioctl(
-                s.fileno(),
-                0x8915,  # SIOCGIFADDR
-                struct.pack('256s', ifname[:15])
-            )[20:24])
-            response = {
-                'message': str(ip)
-            }
-        except:
-            # Error - could not retrieve IP
-            response = {
-                'message': 'Could not receive IP address'
-            }
+        # try:
+        ip = socket.inet_ntoa(fcntl.ioctl(
+            s.fileno(),
+            0x8915,  # SIOCGIFADDR
+            struct.pack('256s', ifname[:15])
+        )[20:24])
+        response = {
+            'message': str(ip)
+        }
+        # except:
+        #     # Error - could not retrieve IP
+        #     response = {
+        #         'message': 'Could not receive IP address'
+        #     }
         return json.dumps(response)
 
     def getRandomNumber(self, params):
