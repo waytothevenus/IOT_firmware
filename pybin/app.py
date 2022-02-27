@@ -20,7 +20,8 @@ The pywebview front facing gui
 """
 
 DEBUG = True
-STORAGE_FILE = "/home/pi/iot_tmp/.iot_storage_"
+TMP_DIR = '/home/pi/iot_tmp/'
+STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 
 class Api():
@@ -185,7 +186,7 @@ class Api():
     def setWifi(self, ssid, password):
         self.log('set WIFI')
 
-    def autoUpdate(self, params):
+    def update(self, params):
         # Use subprocess.check_output if you expect a response
         process = subprocess.check_output(
             "sudo /home/pi/firmware/bin/util/update.sh",
@@ -229,12 +230,12 @@ class Api():
 
         return p
 
-    def removeAllTempStorage(self, params):
+    def removeAllStorage(self, params):
         if DEBUG:
             self.log(params)
 
         try:
-            os.system('find /home/pi/iot_tmp -mindepth 1 -delete')
+            os.system('find ' + TMP_DIR + ' -mindepth 1 -delete')
         except:
             pass
 
