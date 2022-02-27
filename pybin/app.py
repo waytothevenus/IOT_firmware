@@ -1,8 +1,10 @@
-import json
 import ast
+import json
 import fcntl
+from logging import info
 import os
 import random
+import re
 import socket
 import struct
 import subprocess
@@ -145,17 +147,34 @@ class Api():
         }
         return json.dumps(response)
 
-    def getWifiNetworks(self, params):
-		ip = '000.000.0.0'
+    def getWifiInfo(self, params):
+        info = '000.000.0.0'
         try:
-            process = subprocess.check_output(["sudo", "iwlist", "wlan0", "scan"]).split()[0]
-            ip = process.decode("utf-8")
+            process = subprocess.check_output(
+                ["sudo", "iwconfig", "wlan0"]).split()[0]
+            info = process.decode("utf-8")
+            groups = re.search('ESSID: "([\w ]+)" | Link Quality=(\d)+', info)
+            response = {
+                'message': {
+                    'ssid': groups.group(1),
+                    'quality': groups.group(2)
+                }
+            }
+            return json.dumps(response)
+
         except:
-            ip = 'ERROR'
-        return ip
-        # sudo iwlist wlan0 scan
-        self.log('WIFI')
-        return False
+            info = 'ERROR'
+        return info
+
+    def getWifiNetworks(self, params):
+        networks = '000.000.0.0'
+        try:
+            process = subprocess.check_output(
+                ["sudo", "iwlist", "wlan0", "scan"]).split()[0]
+            networks = process.decode("utf-8")
+        except:
+            networks = 'ERROR'
+        return networks
 
     def setWifi(self, ssid, password):
         self.log('set WIFI')
