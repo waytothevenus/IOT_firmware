@@ -215,16 +215,15 @@ class Api():
             ssid = str(p[u'ssid'])
             password = str(p[u'password'])
             try:
-                # Create folder if needed
-                if not os.path.exists(TMP_DIR):
-                    os.makedirs(TMP_DIR)
-                f = open(STORAGE_FILE + ssid, "w")
-                f.write(password)
-                f.close()
+                # Use subprocess.check_output if you expect a response
+                process = subprocess.check_output(
+                    ["sudo", "bash", "/home/pi/firmware/bin/util/connect-wifi-network.sh"],
+                    stderr=subprocess.STDOUT
+                )
+
                 response = {
-                    'message': 'ok'
+                    'message': str(process.decode("utf-8"))
                 }
-                self.log('Set ' + ssid + ': ' + password)
             except:
                 response = {
                     'message': ''
