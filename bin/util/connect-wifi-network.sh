@@ -7,14 +7,18 @@ network="$(wpa_cli -i wlan0 add_network)"
 # > 0 # this is the new network's ID
 echo "Setting network $network to $1"
 wpa_cli -i wlan0 set_network "$network" ssid '"'$1'"'
-# wpa_cli set_network '$network' psk '""'
+
 if [[ ! -z $2 ]]; then
 	echo "Setting network $network password to $2"
 	wpa_cli -i wlan0 set_network "$network" psk '"'$2'"'
 else
 	wpa_cli -i wlan0 set_network "$network" key_mgmt NONE
 fi
+
+echo "Enable network $network for $1"
 wpa_cli -i wlan0 enable_network "$network"
+echo "Reconnect to $1"
 wpa_cli -i wlan0 select_network "$network"
 wpa_cli -i wlan0 save_config
-# wpa_cli -i wlan0 reconfigure
+
+# wpa_cli -i wlan0 reconfigure # This will force wifi to rescan/reconnect
