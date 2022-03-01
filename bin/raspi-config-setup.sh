@@ -22,7 +22,7 @@ sudo raspi-config nonint do_vnc 0
 sudo raspi-config nonint do_vnc_resolution "1280x720"
 vcgencmd get_mem gpu | cut -d = -f 2 | cut -d M -f 1
 
-sudo raspi-config nonint disable_raspi_config_at_boot
+sudo raspi-config nonint disable_raspi_config_at_boot 0
 sudo raspi-config nonint do_hostname "smartcloud"
 
 # do_wifi_ssid_passphrase
