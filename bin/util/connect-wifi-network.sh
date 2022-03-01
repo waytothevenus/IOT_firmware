@@ -11,4 +11,4 @@ if [[ ! -z $2 ]]; then
 fi
 wpa_cli enable_network "$network"
 wpa_cli save_config
-wpa_cli -i wlan0 reassociate "$network"
+wpa_cli -i wlan0 reconfigure
