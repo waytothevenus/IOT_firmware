@@ -17,6 +17,9 @@ sudo git clone https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
 
 sudo git -C /home/pi/firmware/ config pull.rebase false
 
+# TODO use main branch
+sudo git -C /home/pi/firmware/ checkout dev
+
 # Config files
 sudo touch /boot/ssh
 sudo cp -R /home/pi/firmware/root/boot/* /boot/
