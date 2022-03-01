@@ -25,10 +25,6 @@ sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
 
 sudo cp -R /home/pi/firmware/root/home/pi/* /home/pi
 
-# # Copy shell scripts
-# echo '> Add shell files'
-# sudo cp -r /home/pi/hackpack-server/bin/ /home/pi/
-
 
 # # Set Permissions
 # echo '> Set shell permissions'
@@ -38,7 +34,7 @@ sudo cp -R /home/pi/firmware/root/home/pi/* /home/pi
 sudo rm /etc/rc.local
 sudo cp -R /home/pi/firmware/root/etc/rc.local /etc
 
-
+# TODO Change password
 # Set user password
 sudo echo "pi:pi" > pass.txt
 sudo chpasswd < pass.txt
@@ -46,7 +42,8 @@ sudo chpasswd < pass.txt
 # raspi-config
 sudo bash /home/pi/firmware/bin/raspi-config-setup.sh
 
-# raspi-config
+# TODO REMOVE: Setup home wifi network; replace <ssid> and <password>
+# sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
 sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
 # Reboot
