@@ -67,7 +67,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'message': ''
+                'message': 'Error: No key provided'
             }
             return json.dumps(response)
 
@@ -87,7 +87,7 @@ class Api():
                 }
             return json.dumps(response)
         response = {
-            'message': ''
+            'message': 'Error: Invalid key'
         }
         return json.dumps(response)
 
@@ -98,7 +98,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'message': ''
+                'message': 'Error: key and value must be provided'
             }
             return json.dumps(response)
 
@@ -118,7 +118,7 @@ class Api():
                 self.log('Set ' + key + ': ' + data)
             except:
                 response = {
-                    'message': ''
+                    'message': 'Error: Invalid params'
                 }
         else:
             response = {
@@ -201,36 +201,32 @@ class Api():
         }
         return json.dumps(response)
 
-    def connectWifiNetwork(self, params):
+    # Connect to a wifi network
+    def setWifiNetwork(self, params):
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'message': ''
+                'message': 'Error: No credentials provided'
             }
             return json.dumps(response)
 
         if u'ssid' in p and u'password' in p:
             ssid = str(p[u'ssid'])
             password = str(p[u'password'])
-            try:
-                # Use subprocess.check_output if you expect a response
-                process = subprocess.check_output(
-                    ["sudo", "bash", "/home/pi/firmware/bin/util/connect-wifi-network.sh"],
-                    stderr=subprocess.STDOUT
-                )
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/connect-wifi-network.sh", ssid, password],
+                stderr=subprocess.STDOUT
+            )
 
-                response = {
-                    'message': str(process.decode("utf-8"))
-                }
-            except:
-                response = {
-                    'message': ''
-                }
+            response = {
+                'message': str(process.decode("utf-8"))
+            }
         else:
             response = {
-                'message': 'Error'
+                'message': 'Error: Invalid credentials'
             }
         return json.dumps(response)
 
@@ -294,16 +290,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-            # url="",
-            js_api=api,
-            width=640,
-            height=350,
-            # frameless=True,
-            # on_top=False,
-            # fullscreen=False,
-            resizable=False,
-            text_select=False,
-            min_size=(320, 240),
-            background_color='#F00'
+        # url="",
+        js_api=api,
+        width=640,
+        height=350,
+        # frameless=True,
+        # on_top=False,
+        # fullscreen=False,
+        resizable=False,
+        text_select=False,
+        min_size=(320, 240),
+        background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
