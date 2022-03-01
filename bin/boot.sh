@@ -10,7 +10,9 @@ fi
 # Update
 sudo git -C /home/pi/firmware pull
 
+# we don't need node
 # If node doesn't exist, we haven't had a first run
+# pip3 list | grep webview
 if ! command -v node &> /dev/null
 then
     echo "-*- First Run -*-"
