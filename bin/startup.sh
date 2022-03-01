@@ -1,3 +1,5 @@
 #!/bin/sh
 
-# vncserver -randr=1280x720
+PYTHON="$(sudo bash /home/pi/firmware/bin/util/check-python.sh)"
+
+sudo $PYTHON /home/pi/firmware/pybin/app.py
