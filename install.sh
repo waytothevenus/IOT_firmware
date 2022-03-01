@@ -46,5 +46,8 @@ sudo chpasswd < pass.txt
 # raspi-config
 sudo bash /home/pi/firmware/bin/raspi-config-setup.sh
 
+# raspi-config
+sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
+
 # Reboot
 sudo reboot
