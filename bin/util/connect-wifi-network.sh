@@ -15,5 +15,6 @@ else
 	wpa_cli -i wlan0 set_network "$network" key_mgmt NONE
 fi
 wpa_cli -i wlan0 enable_network "$network"
+wpa_cli -i wlan0 select_network "$network"
 wpa_cli -i wlan0 save_config
 # wpa_cli -i wlan0 reconfigure
