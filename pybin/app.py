@@ -236,6 +236,7 @@ class Api():
 
     def log(self, text):
         print('[Cloud] %s' % text)
+        return 'ok'
 
     def longTime(self, params):
         time.sleep(15)
