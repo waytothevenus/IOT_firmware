@@ -236,14 +236,20 @@ class Api():
             process = subprocess.check_output(
                 ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
                 stderr=subprocess.STDOUT)
-            response = {
-                'message': str(process),
-            }
-            return json.dumps(response)
+            result = str(process.decode("utf-8"))
+            if (result != 'ok'):
+                response = {
+                    'error': str(process),
+                }
+            else:
+                response = {
+                    'message': str(process),
+                }
         except:
             response = {
                 'error': 'Could not connect',
             }
+        return json.dumps(response)
 
     def log(self, text):
         print('[Cloud] %s' % text)
@@ -314,16 +320,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-            # url="",
-            js_api=api,
-            width=480,
-            height=310,
-            # frameless=True,
-            # on_top=False,
-            # fullscreen=False,
-            resizable=False,
-            text_select=False,
-            min_size=(320, 240),
-            background_color='#F00'
+        # url="",
+        js_api=api,
+        width=480,
+        height=310,
+        # frameless=True,
+        # on_top=False,
+        # fullscreen=False,
+        resizable=False,
+        text_select=False,
+        min_size=(320, 240),
+        background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
