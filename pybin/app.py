@@ -164,6 +164,10 @@ class Api():
             groups = re.search(
                 r'ESSID:"(.+)"[\S\s.]+Link Quality=(\d+)', info)
 
+            if DEBUG:
+                self.log('Network: ' + str(groups.group(1)) +
+                         ' Quality: ' + str(groups.group(2)))
+
             response = {
                 'message': {
                     'ssid': groups.group(1),
