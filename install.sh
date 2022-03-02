@@ -35,7 +35,7 @@ sudo cp -R /home/pi/firmware/root/etc/default /etc/default
 
 # TODO Splashscreen
 
-sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+# sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
 # sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
 
 
@@ -51,6 +51,10 @@ sudo chpasswd < pass.txt
 # raspi-config
 sudo bash /home/pi/firmware/bin/util/raspi-config-setup.sh
 
+# Delete Raspi-config wizard
+sudo cp /etc/xdg/autostart/piwiz.desktop /home/pi/firmware
+sudo rm /etc/xdg/autostart/piwiz.desktop
+
 # TODO REMOVE: Setup home wifi network; replace <ssid> and <password>
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
@@ -62,4 +66,4 @@ if [ ! -e /home/pi/.first_run ]; then
 fi
 
 # Reboot (if display script didn't already)
-# sudo reboot
+sudo reboot
