@@ -232,18 +232,18 @@ class Api():
         return json.dumps(response)
 
     def checkWifiConnection(self, params):
-		process = subprocess.check_output(
-			["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
-			stderr=subprocess.STDOUT)
-		result = str(process.decode("utf-8")).trim()
-		if (result != 'true'):
-			response = {
-				'error': result,
-			}
-		else:
-			response = {
-				'message': result,
-			}
+        process = subprocess.check_output(
+            ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
+            stderr=subprocess.STDOUT)
+        result = str(process.decode("utf-8")).trim()
+        if (result != 'true'):
+            response = {
+                'error': result,
+            }
+        else:
+            response = {
+                'message': result,
+            }
 
         return json.dumps(response)
 
@@ -316,16 +316,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-        # url="",
-        js_api=api,
-        width=480,
-        height=310,
-        # frameless=True,
-        # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00'
+            # url="",
+            js_api=api,
+            width=480,
+            height=310,
+            # frameless=True,
+            # on_top=False,
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
