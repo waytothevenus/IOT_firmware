@@ -1,5 +1,7 @@
 # Raspberry Pi IoT device config
 
+# uncomment if hdmi display is not detected and composite is being output
+# hdmi_force_hotplug=1
 
 # Set screen size to 640x480
 # framebuffer_width=640
@@ -14,8 +16,15 @@ max_usb_current=1
 # Disable overscan to remove border of unusable black pixels on screen
 # disable_overscan=1
 
-# The display utilizes SPI, but not spidev
+# The hackpack display utilizes SPI, but not spidev
 # dtoverlay=spi1-3cs
+
+# Enable the TFT LCD by applying the appropriate boot overlay. This overlay is
+# provided by the LCD-show project and must be copied over to the /boot/overlay
+# directory.
+#
+# See: https://github.com/goodtft/LCD-show
+dtoverlay=tft35a:rotate=0
 
 # sdtv_mode=1
 # sdtv_aspect=1
