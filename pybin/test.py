@@ -100,6 +100,17 @@ class Api():
         }
         return json.dumps(response)
 
+    def parse_react_json(self, react_json):
+        try:
+            p = ast.literal_eval(react_json)
+        except:
+            try:
+                p = ast.literal_eval(json.dumps(react_json))
+            except:
+                return ''
+
+        return p
+
 
 if __name__ == '__main__':
     api = Api()
