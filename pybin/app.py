@@ -332,4 +332,4 @@ if __name__ == '__main__':
         min_size=(320, 240),
         background_color='#F00'
     )
-    webview.start(debug=DEBUG, http_server=True)
+    webview.start(debug=DEBUG, http_server=False)
