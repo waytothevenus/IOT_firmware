@@ -292,14 +292,14 @@ if __name__ == '__main__':
         # url="https://lmorrow.ngrok.io/",
         # url="",
         js_api=api,
-        width=640,
-        height=350,
-        # frameless=True,
+        width=480,
+        height=320,
+        frameless=True,
         # on_top=False,
-        # fullscreen=False,
+        fullscreen=False,
         resizable=False,
         text_select=False,
-        min_size=(320, 240),
+        min_size=(240, 160),
         background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
