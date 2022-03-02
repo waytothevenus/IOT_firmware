@@ -80,7 +80,7 @@ class Api():
                 value = f.read()
                 f.close()
                 response = {
-                    'message': value
+                    'message': json.dumps(value)
                 }
                 self.log('Get ' + key + ': ' + value)
             except:
