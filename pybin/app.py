@@ -67,7 +67,7 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-		print(p)
+        print(p)
         if p == '':
             response = {
                 'error': 'Error: No key provided'
@@ -75,9 +75,9 @@ class Api():
             return json.dumps(response)
 
         if u'key' in p:
-			print('key')
+            print('key')
             key = p[u'key']
-			print(key)
+            print(key)
             if not os.path.exists(STORAGE_FILE + str(key)):
                 open(STORAGE_FILE + str(key), 'w').close()
                 response = {
@@ -89,9 +89,9 @@ class Api():
             # f = open(STORAGE_FILE + str(key), "r")
             # value = f.read()
             # f.close()
-			print(STORAGE_FILE + str(key))
+            print(STORAGE_FILE + str(key))
             value = json.load(open(STORAGE_FILE + str(key), "r"))
-			print(value)
+            print(value)
             self.log(value)
             response = {
                 'message': value
@@ -344,8 +344,8 @@ if __name__ == '__main__':
         min_size=(320, 240),
         background_color='#F00'
         # url="",
-        # url="https://lmorrow.ngrok.io/",
-        # on_top=False,
-        # fullscreen=False,
+            # url="https://lmorrow.ngrok.io/",
+            # on_top=False,
+            # fullscreen=False,
     )
     webview.start(debug=DEBUG, http_server=True)
