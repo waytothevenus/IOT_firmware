@@ -93,6 +93,13 @@ class Api():
             }
         return json.dumps(response)
 
+    def log(self, text):
+        print('[Cloud] %s' % text)
+        response = {
+            'message': 'ok',
+        }
+        return json.dumps(response)
+
 
 if __name__ == '__main__':
     api = Api()
