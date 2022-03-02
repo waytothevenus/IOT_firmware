@@ -79,10 +79,11 @@ class Api():
                 f = open(STORAGE_FILE + str(key), "r")
                 value = f.read()
                 f.close()
-                response = {
-                    'message': json.dumps(value)
-                }
                 self.log('Get ' + key + ': ' + value)
+                self.log(json.loads(value))
+                response = {
+                    'message': json.loads(value).data
+                }
             except:
                 response = {
                     'error': 'Get Error'
@@ -112,7 +113,7 @@ class Api():
                 if not os.path.exists(TMP_DIR):
                     os.makedirs(TMP_DIR)
                 f = open(STORAGE_FILE + key, "w")
-                f.write(data)
+                f.write(json.dumps({data: data}))
                 f.close()
                 response = {
                     'message': 'ok'
@@ -326,10 +327,10 @@ if __name__ == '__main__':
         height=320,
         frameless=True,
         # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00'
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=False)
