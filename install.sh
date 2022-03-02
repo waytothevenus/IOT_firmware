@@ -53,7 +53,8 @@ sudo bash /home/pi/firmware/bin/util/raspi-config-setup.sh
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
-sudo bash /home/pi/firmware/bin/util/install-display.sh
+# If connected to network
+ping -q -c1 google.com &>/dev/null && sudo bash /home/pi/firmware/bin/first_run.sh
 
 # Reboot (if display script didn't already)
 # sudo reboot
