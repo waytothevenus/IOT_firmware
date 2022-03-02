@@ -18,6 +18,7 @@ fi
 echo "Enable network $network for $1"
 wpa_cli -i wlan0 enable_network "$network"
 echo "Reconnect to $1"
+# This disables all other networks
 wpa_cli -i wlan0 select_network "$network"
 wpa_cli -i wlan0 save_config
 

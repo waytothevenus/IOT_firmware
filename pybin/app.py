@@ -200,20 +200,6 @@ class Api():
     def setWifi(self, ssid, password):
         self.log('set WIFI')
 
-    def checkWifiConnection(self, params):
-        try:
-            process = subprocess.check_output(
-                ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
-                stderr=subprocess.STDOUT)
-            response = {
-                'message': str(process),
-            }
-            return json.dumps(response)
-        except:
-            response = {
-                'error': 'Could not connect',
-            }
-
     # Connect to a wifi network
 
     def setWifiNetwork(self, params):
@@ -243,6 +229,20 @@ class Api():
                 'message': 'Error: Invalid credentials'
             }
         return json.dumps(response)
+
+    def checkWifiConnection(self, params):
+        try:
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
+                stderr=subprocess.STDOUT)
+            response = {
+                'message': str(process),
+            }
+            return json.dumps(response)
+        except:
+            response = {
+                'error': 'Could not connect',
+            }
 
     def log(self, text):
         print('[Cloud] %s' % text)
