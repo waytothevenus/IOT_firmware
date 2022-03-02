@@ -17,6 +17,7 @@ sudo raspi-config nonint do_change_timezone "America/New_York"
 sudo raspi-config nonint do_wifi_country "US"
 sudo raspi-config nonint do_ssh 0
 sudo raspi-config nonint do_vnc 0
+sudo raspi-config nonint do_spi 0
 
 # sudo raspi-config nonint do_resolution
 # sudo raspi-config nonint do_vnc_resolution "1280x720"

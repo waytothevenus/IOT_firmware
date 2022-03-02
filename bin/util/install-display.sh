@@ -8,4 +8,5 @@
 
 # Use local
 sudo chmod -R 755 /home/pi/firmware/drivers/LCD-show
-sudo -S su -c /home/pi/firmware/drivers/LCD-show/MHS35-show
+cd /home/pi/firmware/drivers/LCD-show
+sudo su -c ./MHS35-show

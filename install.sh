@@ -19,8 +19,13 @@ sudo git clone --single-branch --branch dev https://github.com/lacymorrow/iot-fi
 sudo git -C /home/pi/firmware/ config pull.rebase false
 sudo chmod -R 755 /home/pi/firmware/bin
 
-# Config files
+# Backup Config files
+sudo cp /boot/config.txt /boot/config.old.txt
+
+# Enable SSH
 sudo touch /boot/ssh
+
+# Copy root directory
 sudo cp -R /home/pi/firmware/root/boot/* /boot/
 sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
 sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
@@ -30,7 +35,7 @@ sudo cp -R /home/pi/firmware/root/home/pi/* /home/pi
 
 # # Set Permissions
 # echo '> Set shell permissions'
-# sudo chmod 755 -R /home/pi/bin/
+# sudo chmod 755 -R /home/pi/firmware/bin/
 
 # Boot files
 sudo rm /etc/rc.local
