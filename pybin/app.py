@@ -15,6 +15,8 @@ import webview
 # import threading
 # import collections
 
+# TODO: Try/catch all the things
+
 """
 The pywebview front facing gui
 """
@@ -181,7 +183,6 @@ class Api():
         return info
 
     def getWifiNetworks(self, params):
-        networks = 'Error'
         try:
             ps = subprocess.Popen(
                 ('sudo', 'iwlist', 'wlan0', 'scan'), stdout=subprocess.PIPE)
@@ -189,23 +190,32 @@ class Api():
                 ('grep', 'ESSID:'), stdin=ps.stdout)
             ps.wait()
             networks = process.decode("utf-8")
+            return networks
         except:
-            self.log('getWifiNetworks Error')
-        return networks
+            response = {
+                'error': 'Could not list networks',
+            }
+        return json.dumps(response)
 
     def setWifi(self, ssid, password):
         self.log('set WIFI')
 
     def checkWifiConnection(self, params):
-        process = subprocess.check_output(
-            ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
-            stderr=subprocess.STDOUT)
-        response = {
-            'message': str(process),
-        }
-        return json.dumps(response)
+        try:
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
+                stderr=subprocess.STDOUT)
+            response = {
+                'message': str(process),
+            }
+            return json.dumps(response)
+        except:
+            response = {
+                'error': 'Could not connect',
+            }
 
     # Connect to a wifi network
+
     def setWifiNetwork(self, params):
         if DEBUG:
             self.log(params)
@@ -274,15 +284,20 @@ class Api():
         webview.windows[0].toggle_fullscreen()
 
     def update(self, params):
-        # Use subprocess.check_output if you expect a response
-        process = subprocess.check_output(
-            ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
-            stderr=subprocess.STDOUT
-        )
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
+                stderr=subprocess.STDOUT
+            )
 
-        response = {
-            'message': str(process.decode("utf-8"))
-        }
+            response = {
+                'message': str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                'error': 'Could not update',
+            }
         return json.dumps(response)
 
 # wpa_cli - i wlan0 reconfigure
@@ -295,16 +310,16 @@ if __name__ == '__main__':
         'Smartcloud',
         url="/home/pi/firmware/static/index.html",
         # url="https://lmorrow.ngrok.io/",
-        # url="",
-        js_api=api,
-        width=480,
-        height=310,
-        # frameless=True,
-        # on_top=False,
-        # fullscreen=False,
-        resizable=False,
-        text_select=False,
-        min_size=(320, 240),
-        background_color='#F00'
+            # url="",
+            js_api=api,
+            width=480,
+            height=310,
+            # frameless=True,
+            # on_top=False,
+            # fullscreen=False,
+            resizable=False,
+            text_select=False,
+            min_size=(320, 240),
+            background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
