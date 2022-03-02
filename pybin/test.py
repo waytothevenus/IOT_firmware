@@ -97,7 +97,7 @@ class Api():
 if __name__ == '__main__':
     api = Api()
 
-    print(api.set({'key': "asdf", 'data': 1234})
-    print(api.get({'key': "asdf"})
-    print(api.set({'key': "a", 'data': "asd"})
-    print(api.set({'key': "a", 'data': "asd"})
+    print(api.set({'key': "asdf", 'data': 1234}))
+    print(api.get({'key': "asdf"}))
+    print(api.set({'key': "a", 'data': "asd"}))
+    print(api.set({'key': "a", 'data': "asd"}))
