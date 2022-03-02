@@ -17,7 +17,7 @@ sudo rm -rf /home/pi/firmware
 sudo git clone --single-branch --branch dev https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
 
 sudo git -C /home/pi/firmware/ config pull.rebase false
-
+sudo chmod -R 755 /home/pi/firmware/bin
 
 # Config files
 sudo touch /boot/ssh
@@ -42,11 +42,13 @@ sudo echo "pi:pi" > pass.txt
 sudo chpasswd < pass.txt
 
 # raspi-config
-sudo bash /home/pi/firmware/bin/raspi-config-setup.sh
+sudo bash /home/pi/firmware/bin/util/raspi-config-setup.sh
 
 # TODO REMOVE: Setup home wifi network; replace <ssid> and <password>
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
-sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
+# sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
-# Reboot
-sudo reboot
+sudo bash /home/pi/firmware/bin/util/install-display.sh
+
+# Reboot (if display script didn't already)
+# sudo reboot
