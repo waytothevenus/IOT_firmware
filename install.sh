@@ -30,13 +30,13 @@ sudo rm /etc/rc.local
 sudo cp /home/pi/firmware/root/etc/rc.local /etc/rc.local
 
 # Copy root directory
-sudo cp -R /home/pi/firmware/root/boot/* /boot/
-sudo cp -R /home/pi/firmware/root/etc/default/ /etc/default
+sudo cp -R /home/pi/firmware/root/boot /boot/
+sudo cp -R /home/pi/firmware/root/etc/default /etc/default
 
 # TODO Splashscreen
 
 sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
-sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
+# sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
 
 
 # # Set Permissions
