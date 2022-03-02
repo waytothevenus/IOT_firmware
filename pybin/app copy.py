@@ -197,6 +197,9 @@ class Api():
             }
         return json.dumps(response)
 
+    def setWifi(self, ssid, password):
+        self.log('set WIFI')
+
     # Connect to a wifi network
 
     def setWifiNetwork(self, params):
