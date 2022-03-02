@@ -237,7 +237,7 @@ class Api():
                 ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
                 stderr=subprocess.STDOUT)
             result = str(process.decode("utf-8"))
-            if (result != 'ok'):
+            if (result != 'true'):
                 response = {
                     'error': str(process),
                 }
