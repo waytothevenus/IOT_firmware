@@ -75,23 +75,23 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
-            try:
-                # f = open(STORAGE_FILE + str(key), "r")
-                # value = f.read()
-                # f.close()
-                value = json.load(open(STORAGE_FILE + str(key), "r"))
-                self.log(value)
-                response = {
-                    'message': value.data
-                }
-            except:
-                response = {
-                    'error': 'Get Error'
-                }
-            return json.dumps(response)
-        response = {
-            'error': 'Error: Invalid key'
-        }
+            # try:
+            # f = open(STORAGE_FILE + str(key), "r")
+            # value = f.read()
+            # f.close()
+            value = json.load(open(STORAGE_FILE + str(key), "r"))
+            self.log(value)
+            response = {
+                'message': value.data
+            }
+            # except:
+            response = {
+                'error': 'Get Error'
+            }
+            # return json.dumps(response)
+        # response = {
+        #     'error': 'Error: Invalid key'
+        # }
         return json.dumps(response)
 
     # set({key, data})
