@@ -318,18 +318,18 @@ if __name__ == '__main__':
     # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         'Smartcloud',
-        url="/home/pi/firmware/static/index.html",
-        # url="https://lmorrow.ngrok.io/",
-            # url="",
-            js_api=api,
-            width=480,
-            height=320,
-            frameless=True,
-            # on_top=False,
-            # fullscreen=False,
-            resizable=False,
-            text_select=False,
-            min_size=(320, 240),
-            background_color='#F00'
+        # url="/home/pi/firmware/static/index.html",
+        # url="",
+        url="https://lmorrow.ngrok.io/",
+        js_api=api,
+        width=480,
+        height=320,
+        frameless=True,
+        # on_top=False,
+        # fullscreen=False,
+        resizable=False,
+        text_select=False,
+        min_size=(320, 240),
+        background_color='#F00'
     )
     webview.start(debug=DEBUG, http_server=True)
