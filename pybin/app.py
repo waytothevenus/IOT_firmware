@@ -232,19 +232,23 @@ class Api():
         return json.dumps(response)
 
     def checkWifiConnection(self, params):
-        process = subprocess.check_output(
-            ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
-            stderr=subprocess.STDOUT)
-        result = str(process.decode("utf-8")).strip('\n')
-        if (result != 'true'):
+        try:
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
+                stderr=subprocess.STDOUT)
+            result = str(process.decode("utf-8")).strip('\n')
+            if (result != 'true'):
+                response = {
+                    'error': result,
+                }
+            else:
+                response = {
+                    'message': result,
+                }
+        except:
             response = {
-                'error': result,
+                'error': 'Could not connect',
             }
-        else:
-            response = {
-                'message': result,
-            }
-
         return json.dumps(response)
 
     def log(self, text):
