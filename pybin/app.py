@@ -69,7 +69,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'message': 'Error: No key provided'
+                'error': 'Error: No key provided'
             }
             return json.dumps(response)
 
@@ -85,11 +85,11 @@ class Api():
                 self.log('Get ' + key + ': ' + value)
             except:
                 response = {
-                    'message': 'Get Error'
+                    'error': 'Get Error'
                 }
             return json.dumps(response)
         response = {
-            'message': 'Error: Invalid key'
+            'error': 'Error: Invalid key'
         }
         return json.dumps(response)
 
@@ -100,7 +100,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'message': 'Error: key and value must be provided'
+                'error': 'Error: key and value must be provided'
             }
             return json.dumps(response)
 
@@ -120,11 +120,11 @@ class Api():
                 self.log('Set ' + key + ': ' + data)
             except:
                 response = {
-                    'message': 'Error: Invalid params'
+                    'error': 'Error: Invalid params'
                 }
         else:
             response = {
-                'message': 'Set Error'
+                'error': 'Set Error'
             }
         return json.dumps(response)
 
@@ -209,7 +209,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'message': 'Error: No credentials provided'
+                'error': 'Error: No credentials provided'
             }
             return json.dumps(response)
 
