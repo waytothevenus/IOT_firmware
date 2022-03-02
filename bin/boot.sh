@@ -13,7 +13,7 @@ sudo git -C /home/pi/firmware pull
 # we don't need node
 # If node doesn't exist, we haven't had a first run
 # pip3 list | grep webview
-if [ -e /home/pi/firmware/.first_run ]; then
+if [ ! -e /home/pi/firmware/.first_run ]; then
     echo "-*- First Run -*-"
 	sudo bash /home/pi/firmware/bin/first-run.sh
 fi
