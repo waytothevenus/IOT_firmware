@@ -85,7 +85,7 @@ class Api():
                 self.log('Get ' + key + ': ' + value)
             except:
                 response = {
-                    'message': 'Error'
+                    'message': 'Get Error'
                 }
             return json.dumps(response)
         response = {
@@ -124,7 +124,7 @@ class Api():
                 }
         else:
             response = {
-                'message': 'Error'
+                'message': 'Set Error'
             }
         return json.dumps(response)
 
@@ -157,7 +157,9 @@ class Api():
         return json.dumps(response)
 
     def getWifiInfo(self, params):
-        info = 'Error'
+        response = {
+            'error': 'getWifiInfo Error'
+        }
         try:
             process = subprocess.check_output(
                 ["sudo", "iwconfig", "wlan0"])
@@ -190,7 +192,9 @@ class Api():
                 ('grep', 'ESSID:'), stdin=ps.stdout)
             ps.wait()
             networks = process.decode("utf-8")
-            return networks
+            response = {
+                'message': str(networks),
+            }
         except:
             response = {
                 'error': 'Could not list networks',
@@ -243,7 +247,10 @@ class Api():
 
     def log(self, text):
         print('[Cloud] %s' % text)
-        return 'ok'
+        response = {
+            'message': 'ok',
+        }
+        return json.dumps(response)
 
     def longTime(self, params):
         time.sleep(15)
