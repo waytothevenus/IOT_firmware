@@ -9,10 +9,10 @@
 max_usb_current=1
 
 # Add TTY to serial header
-enable_uart=1
+# enable_uart=1
 
 # Disable overscan to remove border of unusable black pixels on screen
-disable_overscan=1
+# disable_overscan=1
 
 # The display utilizes SPI, but not spidev
 # dtoverlay=spi1-3cs
