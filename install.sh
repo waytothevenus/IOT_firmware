@@ -25,21 +25,23 @@ sudo cp /boot/config.txt /boot/config.old.txt
 # Enable SSH
 sudo touch /boot/ssh
 
+# Boot files
+sudo rm /etc/rc.local
+sudo cp /home/pi/firmware/root/etc/rc.local /etc/rc.local
+
 # Copy root directory
 sudo cp -R /home/pi/firmware/root/boot/* /boot/
-sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
-sudo cp -R /home/pi/firmware/root/etc/default/* /etc/default
+sudo cp -R /home/pi/firmware/root/etc/default/ /etc/default
 
-sudo cp -R /home/pi/firmware/root/home/pi/* /home/pi
+# TODO Splashscreen
+
+sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
 
 
 # # Set Permissions
 # echo '> Set shell permissions'
 # sudo chmod 755 -R /home/pi/firmware/bin/
-
-# Boot files
-sudo rm /etc/rc.local
-sudo cp -R /home/pi/firmware/root/etc/rc.local /etc
 
 # TODO Change password
 # Set user password
@@ -54,7 +56,10 @@ sudo bash /home/pi/firmware/bin/util/raspi-config-setup.sh
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
 # If connected to network
-ping -q -c1 google.com &>/dev/null && sudo bash /home/pi/firmware/bin/first_run.sh
+if [ ! -e /home/pi/.first_run ]; then
+    echo "-*- First Run -*-"
+	sudo bash /home/pi/firmware/bin/first-run.sh
+fi
 
 # Reboot (if display script didn't already)
 # sudo reboot

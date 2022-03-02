@@ -18,6 +18,9 @@ if [ "$_IP" ]; then
 fi
 
 # Do all the stuff here
-sudo bash /home/pi/firmware/bin/boot.sh &
+sleep 7
+fbcp &
+
+sudo bash /home/pi/firmware/bin/init &
 
 exit 0

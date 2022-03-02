@@ -8,19 +8,16 @@ then
 fi
 
 # Update
+echo "-*- Update -*-"
 sudo git -C /home/pi/firmware pull
 
 # we don't need node
 # If node doesn't exist, we haven't had a first run
 # pip3 list | grep webview
-if [ ! -e /home/pi/firmware/.first_run ]; then
+if [ ! -e /home/pi/.first_run ]; then
     echo "-*- First Run -*-"
 	sudo bash /home/pi/firmware/bin/first-run.sh
 fi
-
-# Initialize hardware
-echo "-*- Init -*-"
-sudo /home/pi/firmware/bin/init
 
 echo "-*- Startup -*-"
 sudo bash /home/pi/firmware/bin/startup.sh

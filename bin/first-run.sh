@@ -21,7 +21,7 @@ if : >/dev/tcp/8.8.8.8/53; then
 	# Py dependencies
 	sudo bash /home/pi/firmware/bin/util/pip-install.sh
 
-	touch /home/pi/firmware/.first_run
+	touch /home/pi/.first_run
 
 	# This forces a reboot
 	sudo bash /home/pi/firmware/bin/util/install-display.sh
