@@ -75,6 +75,12 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
+            if not os.path.exists(STORAGE_FILE + str(key)):
+                open(STORAGE_FILE + str(key), 'w').close()
+                response = {
+                    'message': ''
+                }
+                return json.dumps(response)
             # try:
             # f = open(STORAGE_FILE + str(key), "r")
             # value = f.read()
@@ -82,12 +88,12 @@ class Api():
             value = json.load(open(STORAGE_FILE + str(key), "r"))
             self.log(value)
             response = {
-                'message': value.data
+                'message': value
             }
             # except:
-            response = {
-                'error': 'Get Error'
-            }
+            # response = {
+            #     'error': 'Get Error'
+            # }
             # return json.dumps(response)
         # response = {
         #     'error': 'Error: Invalid key'
@@ -332,8 +338,8 @@ if __name__ == '__main__':
         min_size=(320, 240),
         background_color='#F00'
         # url="",
-            # url="https://lmorrow.ngrok.io/",
-            # on_top=False,
-            # fullscreen=False,
+        # url="https://lmorrow.ngrok.io/",
+        # on_top=False,
+        # fullscreen=False,
     )
     webview.start(debug=DEBUG, http_server=True)
