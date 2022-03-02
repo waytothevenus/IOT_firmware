@@ -318,7 +318,7 @@ class Api():
 
 if __name__ == '__main__':
     api = Api()
-    api.removeAllStorage()
+    api.removeAllStorage({})
     # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         'Smartcloud',
