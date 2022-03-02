@@ -67,6 +67,7 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
+		print(p)
         if p == '':
             response = {
                 'error': 'Error: No key provided'
@@ -74,18 +75,23 @@ class Api():
             return json.dumps(response)
 
         if u'key' in p:
+			print('key')
             key = p[u'key']
+			print(key)
             if not os.path.exists(STORAGE_FILE + str(key)):
                 open(STORAGE_FILE + str(key), 'w').close()
                 response = {
                     'message': {'data': ''}
                 }
                 return json.dumps(response)
+
             # try:
             # f = open(STORAGE_FILE + str(key), "r")
             # value = f.read()
             # f.close()
+			print(STORAGE_FILE + str(key))
             value = json.load(open(STORAGE_FILE + str(key), "r"))
+			print(value)
             self.log(value)
             response = {
                 'message': value
