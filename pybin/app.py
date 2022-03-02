@@ -76,13 +76,13 @@ class Api():
         if u'key' in p:
             key = p[u'key']
             try:
-                f = open(STORAGE_FILE + str(key), "r")
-                value = f.read()
-                f.close()
-                self.log('Get ' + key + ': ' + value)
-                self.log(json.loads(value))
+                # f = open(STORAGE_FILE + str(key), "r")
+                # value = f.read()
+                # f.close()
+                value = json.load(open(STORAGE_FILE + str(key), "r"))
+                self.log(value)
                 response = {
-                    'message': json.loads(value).data
+                    'message': value.data
                 }
             except:
                 response = {
@@ -112,9 +112,11 @@ class Api():
                 # Create folder if needed
                 if not os.path.exists(TMP_DIR):
                     os.makedirs(TMP_DIR)
-                f = open(STORAGE_FILE + key, "w")
-                f.write(json.dumps({data: data}))
-                f.close()
+
+                json.dump({'data': data}, open(STORAGE_FILE + key, "w"))
+                # f = open(STORAGE_FILE + key, "w")
+                # f.write(json.dumps({data: data}))
+                # f.close()
                 response = {
                     'message': 'ok'
                 }
@@ -329,8 +331,8 @@ if __name__ == '__main__':
         min_size=(320, 240),
         background_color='#F00'
         # url="",
-        # url="https://lmorrow.ngrok.io/",
-        # on_top=False,
-        # fullscreen=False,
+            # url="https://lmorrow.ngrok.io/",
+            # on_top=False,
+            # fullscreen=False,
     )
     webview.start(debug=DEBUG, http_server=True)
