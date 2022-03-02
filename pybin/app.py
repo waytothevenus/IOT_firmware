@@ -78,7 +78,7 @@ class Api():
             if not os.path.exists(STORAGE_FILE + str(key)):
                 open(STORAGE_FILE + str(key), 'w').close()
                 response = {
-                    'message': ''
+                    'message': {'data': ''}
                 }
                 return json.dumps(response)
             # try:
