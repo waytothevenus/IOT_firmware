@@ -85,8 +85,9 @@ class Api():
                 }
                 self.log('Get ' + key + ': ' + value)
             except:
+                # Not set
                 response = {
-                    'error': 'Get Error'
+                    'message': ''
                 }
             return json.dumps(response)
         response = {
