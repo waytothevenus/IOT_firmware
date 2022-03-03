@@ -47,7 +47,7 @@ class Api():
             process = subprocess.check_output(["hostname", "-I"]).split()[0]
             ip = process.decode("utf-8")
         except:
-            ip = 'ERROR'
+            ip = "error"
         return ip
 
     def __init__(self):
@@ -70,7 +70,7 @@ class Api():
         print(p)
         if p == '':
             response = {
-                'error': 'Error: No key provided'
+                "error": 'Error: No key provided'
             }
             return json.dumps(response)
 
@@ -98,11 +98,11 @@ class Api():
             }
             # except:
             # response = {
-            #     'error': 'Get Error'
+            #     "error": 'Get Error'
             # }
             # return json.dumps(response)
         # response = {
-        #     'error': 'Error: Invalid key'
+        #     "error": 'Error: Invalid key'
         # }
         return json.dumps(response)
 
@@ -113,7 +113,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'error': 'Error: key and value must be provided'
+                "error": 'Error: key and value must be provided'
             }
             return json.dumps(response)
 
@@ -135,11 +135,11 @@ class Api():
                 self.log('Set ' + key + ': ' + data)
             except:
                 response = {
-                    'error': 'Error: Invalid params'
+                    "error": 'Error: Invalid params'
                 }
         else:
             response = {
-                'error': 'Set Error'
+                "error": 'Set Error'
             }
         return json.dumps(response)
 
@@ -173,7 +173,7 @@ class Api():
 
     def getWifiInfo(self, params):
         response = {
-            'error': 'getWifiInfo Error'
+            "error": 'getWifiInfo Error'
         }
         try:
             process = subprocess.check_output(
@@ -212,7 +212,7 @@ class Api():
             }
         except:
             response = {
-                'error': 'Could not list networks',
+                "error": 'Could not list networks',
             }
         return json.dumps(response)
 
@@ -224,7 +224,7 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                'error': 'Error: No credentials provided'
+                "error": 'Error: No credentials provided'
             }
             return json.dumps(response)
 
@@ -254,7 +254,7 @@ class Api():
             result = str(process.decode("utf-8")).strip('\n')
             if (result != 'true'):
                 response = {
-                    'error': result,
+                    "error": result,
                 }
             else:
                 response = {
@@ -262,7 +262,7 @@ class Api():
                 }
         except:
             response = {
-                'error': 'Could not connect',
+                "error": 'Could not connect',
             }
         return json.dumps(response)
 
@@ -321,7 +321,7 @@ class Api():
             }
         except:
             response = {
-                'error': 'Could not update',
+                "error": 'Could not update',
             }
         return json.dumps(response)
 
