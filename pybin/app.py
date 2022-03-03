@@ -81,7 +81,7 @@ class Api():
             f.close()
             print(value)
             print(str(value))
-            value2 = json.loads(value)
+            value2 = ast.literal_eval(value)
             print(value2)
             response = {
                 'message': value
