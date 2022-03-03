@@ -63,47 +63,35 @@ class Api():
         return json.dumps(response)
 
     # get({key})
+
     def get(self, params):
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        print(p)
         if p == '':
             response = {
-                "error": 'Error: No key provided'
+                'message': 'Error: No key provided'
             }
             return json.dumps(response)
 
-        if u"key" in p:
-            print("key")
-            key = p[u"key"]
-            print(key)
-            if not os.path.exists(STORAGE_FILE + str(key)):
-                open(STORAGE_FILE + str(key), 'w').close()
+        if u'key' in p:
+            key = p[u'key']
+            try:
+                f = open(STORAGE_FILE + str(key), "r")
+                value = f.read()
+                f.close()
                 response = {
-                    "message": {"data": ''}
+                    'message': value
                 }
-                return json.dumps(response)
-
-            # try:
-            # f = open(STORAGE_FILE + str(key), "r")
-            # value = f.read()
-            # f.close()
-            print(STORAGE_FILE + str(key))
-            value = json.load(open(STORAGE_FILE + str(key), "r"))
-            print(value)
-            self.log(value)
-            response = {
-                "message": value
-            }
-            # except:
-            # response = {
-            #     "error": 'Get Error'
-            # }
-            # return json.dumps(response)
-        # response = {
-        #     "error": 'Error: Invalid key'
-        # }
+                self.log('Get ' + key + ': ' + value)
+            except:
+                response = {
+                    'message': 'Error'
+                }
+            return json.dumps(response)
+        response = {
+            'message': 'Error: Invalid key'
+        }
         return json.dumps(response)
 
     # set({key, data})
@@ -113,33 +101,31 @@ class Api():
         p = self.parse_react_json(params)
         if p == '':
             response = {
-                "error": 'Error: key and value must be provided'
+                'message': 'Error: key and value must be provided'
             }
             return json.dumps(response)
 
-        if u"key" in p and u"data" in p:
-            key = str(p[u"key"])
-            data = str(p[u"data"])
+        if u'key' in p and u'data' in p:
+            key = str(p[u'key'])
+            data = str(p[u'data'])
             try:
                 # Create folder if needed
                 if not os.path.exists(TMP_DIR):
                     os.makedirs(TMP_DIR)
-
-                json.dump({"data": data}, open(STORAGE_FILE + key, "w"))
-                # f = open(STORAGE_FILE + key, "w")
-                # f.write(json.dumps({data: data}))
-                # f.close()
+                f = open(STORAGE_FILE + key, "w")
+                f.write(data)
+                f.close()
                 response = {
-                    "message": "ok"
+                    'message': 'ok'
                 }
                 self.log('Set ' + key + ': ' + data)
             except:
                 response = {
-                    "error": 'Error: Invalid params'
+                    'message': 'Error: Invalid params'
                 }
         else:
             response = {
-                "error": 'Set Error'
+                'message': 'Error'
             }
         return json.dumps(response)
 
