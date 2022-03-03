@@ -58,7 +58,7 @@ class Api():
 
     def init(self, params):
         response = {
-            'message': 'Hello from Python {0}'.format(sys.version)
+            "message": 'Hello from Python {0}'.format(sys.version)
         }
         return json.dumps(response)
 
@@ -74,14 +74,14 @@ class Api():
             }
             return json.dumps(response)
 
-        if u'key' in p:
-            print('key')
-            key = p[u'key']
+        if u"key" in p:
+            print("key")
+            key = p[u"key"]
             print(key)
             if not os.path.exists(STORAGE_FILE + str(key)):
                 open(STORAGE_FILE + str(key), 'w').close()
                 response = {
-                    'message': {'data': ''}
+                    "message": {"data": ''}
                 }
                 return json.dumps(response)
 
@@ -94,7 +94,7 @@ class Api():
             print(value)
             self.log(value)
             response = {
-                'message': value
+                "message": value
             }
             # except:
             # response = {
@@ -117,20 +117,20 @@ class Api():
             }
             return json.dumps(response)
 
-        if u'key' in p and u'data' in p:
-            key = str(p[u'key'])
-            data = str(p[u'data'])
+        if u"key" in p and u"data" in p:
+            key = str(p[u"key"])
+            data = str(p[u"data"])
             try:
                 # Create folder if needed
                 if not os.path.exists(TMP_DIR):
                     os.makedirs(TMP_DIR)
 
-                json.dump({'data': data}, open(STORAGE_FILE + key, "w"))
+                json.dump({"data": data}, open(STORAGE_FILE + key, "w"))
                 # f = open(STORAGE_FILE + key, "w")
                 # f.write(json.dumps({data: data}))
                 # f.close()
                 response = {
-                    'message': 'ok'
+                    "message": "ok"
                 }
                 self.log('Set ' + key + ': ' + data)
             except:
@@ -145,7 +145,7 @@ class Api():
 
     def getHardwareId(self, params):
         response = {
-            'message': self.HW_ID
+            "message": self.HW_ID
         }
 
         if DEBUG:
@@ -155,7 +155,7 @@ class Api():
 
     def getIpAddress(self, params):
         response = {
-            'message': self._get_ip_address(),
+            "message": self._get_ip_address(),
         }
 
         if DEBUG:
@@ -167,7 +167,7 @@ class Api():
         randNum = random.randint(0, 100000000)
         message = 'Random IO: {0}'.format(randNum)
         response = {
-            'message': message
+            "message": message
         }
         return json.dumps(response)
 
@@ -188,7 +188,7 @@ class Api():
                          ' Quality: ' + str(groups.group(2)))
 
             response = {
-                'message': {
+                "message": {
                     'ssid': groups.group(1),
                     'quality': groups.group(2)
                 }
@@ -208,7 +208,7 @@ class Api():
             ps.wait()
             networks = process.decode("utf-8")
             response = {
-                'message': str(networks),
+                "message": str(networks),
             }
         except:
             response = {
@@ -238,11 +238,11 @@ class Api():
             )
 
             response = {
-                'message': str(process.decode("utf-8"))
+                "message": str(process.decode("utf-8"))
             }
         else:
             response = {
-                'message': 'Error: Invalid credentials'
+                "message": 'Error: Invalid credentials'
             }
         return json.dumps(response)
 
@@ -258,7 +258,7 @@ class Api():
                 }
             else:
                 response = {
-                    'message': result,
+                    "message": result,
                 }
         except:
             response = {
@@ -269,14 +269,14 @@ class Api():
     def log(self, text):
         print('[Cloud] %s' % text)
         response = {
-            'message': 'ok',
+            "message": "ok",
         }
         return json.dumps(response)
 
     def longTime(self, params):
         time.sleep(15)
         response = {
-            'message': 'ok'
+            "message": "ok"
         }
         return json.dumps(response)
 
@@ -301,7 +301,7 @@ class Api():
             pass
 
         response = {
-            'message': 'ok'
+            "message": "ok"
         }
         return json.dumps(response)
 
@@ -317,7 +317,7 @@ class Api():
             )
 
             response = {
-                'message': str(process.decode("utf-8"))
+                "message": str(process.decode("utf-8"))
             }
         except:
             response = {
