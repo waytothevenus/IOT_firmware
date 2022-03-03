@@ -81,7 +81,6 @@ class Api():
             f.close()
             print(value)
             print(str(value))
-            print(value.decode('utf-8'))
             value2 = json.loads(value)
             print(value2)
             response = {
