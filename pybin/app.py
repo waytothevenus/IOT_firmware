@@ -80,19 +80,18 @@ class Api():
                 f = open(STORAGE_FILE + str(key), "r")
                 value = f.read()
                 f.close()
+                try:
+                    response = {
+                        'message': ast.literal_eval(value)
+                    }
+                except:
+                    response = {
+                        'message': str(value)
+                    }
             except:
                 # Not set
                 response = {
                     'message': ''
-                }
-
-            try:
-                response = {
-                    'message': ast.literal_eval(value)
-                }
-            except:
-                response = {
-                    'message': str(value)
                 }
         else:
             response = {
@@ -336,8 +335,8 @@ if __name__ == '__main__':
         min_size=(320, 240),
         background_color='#F00'
         # url="",
-            # url="https://lmorrow.ngrok.io/",
-            # on_top=False,
-            # fullscreen=False,
+        # url="https://lmorrow.ngrok.io/",
+        # on_top=False,
+        # fullscreen=False,
     )
     webview.start(debug=DEBUG, http_server=True)
