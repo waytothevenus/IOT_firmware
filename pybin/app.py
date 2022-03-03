@@ -80,8 +80,8 @@ class Api():
                 f = open(STORAGE_FILE + str(key), "r")
                 value = f.read()
                 f.close()
-                value2 = json.loads(value)
-                self.log('Get ' + key + ': ' + value + ' : ' + value2)
+                self.log('Get ' + key + ': ' + value + ' : ')
+                # value2 = json.loads(value)
                 response = {
                     'message': value
                 }
@@ -92,7 +92,7 @@ class Api():
                 }
             return json.dumps(response)
         response = {
-            'error': 'Error: Invalid key'
+            'message': ''
         }
         return json.dumps(response)
 
