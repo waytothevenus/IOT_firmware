@@ -76,24 +76,19 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
-            f = open(STORAGE_FILE + str(key), "r")
-            value = f.read()
-            f.close()
-            print(value)
-            print(str(value))
-            value2 = ast.literal_eval(value)
-            print(value2)
-            response = {
-                'message': value2
-            }
-            # Not set
-            # response = {
-            # 	'message': ''
-            # }
-            return json.dumps(response)
-        response = {
-            'message': ''
-        }
+            try:
+                f = open(STORAGE_FILE + str(key), "r")
+                value = f.read()
+                f.close()
+                self.log('Get ' + key + ': ' + value)
+                response = {
+                    'message': ast.literal_eval(value)
+                }
+            except:
+                # Not set
+                response = {
+                    'message': ''
+                }
         return json.dumps(response)
 
     # set({key, data})
