@@ -80,10 +80,11 @@ class Api():
                 f = open(STORAGE_FILE + str(key), "r")
                 value = f.read()
                 f.close()
+                value2 = json.loads(value)
+                self.log('Get ' + key + ': ' + value + ' : ' + value2)
                 response = {
-                    'message': ast.parse_react_json(value)
+                    'message': value
                 }
-                self.log('Get ' + key + ': ' + value)
             except:
                 # Not set
                 response = {
