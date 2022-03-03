@@ -84,7 +84,7 @@ class Api():
             value2 = ast.literal_eval(value)
             print(value2)
             response = {
-                'message': value
+                'message': value2
             }
             # Not set
             # response = {
