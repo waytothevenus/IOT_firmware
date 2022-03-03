@@ -81,7 +81,7 @@ class Api():
                 value = f.read()
                 f.close()
                 response = {
-                    'message': parse_react_json(value)
+                    'message': ast.parse_react_json(value)
                 }
                 self.log('Get ' + key + ': ' + value)
             except:
