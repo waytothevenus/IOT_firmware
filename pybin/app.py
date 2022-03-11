@@ -68,7 +68,7 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        if p == '':
+        if p == "":
             response = {
                 'error': 'Error: No key provided'
             }
@@ -91,11 +91,11 @@ class Api():
             except:
                 # Not set
                 response = {
-                    'message': ''
+                    'message': ""
                 }
         else:
             response = {
-                'message': ''
+                'message': ""
             }
         return json.dumps(response)
 
@@ -104,7 +104,7 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        if p == '':
+        if p == "":
             response = {
                 'error': 'Error: key and value must be provided'
             }
@@ -208,12 +208,11 @@ class Api():
         return json.dumps(response)
 
     # Connect to a wifi network
-
     def setWifiNetwork(self, params):
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        if p == '':
+        if p == "":
             response = {
                 "error": 'Error: No credentials provided'
             }
@@ -278,7 +277,7 @@ class Api():
             try:
                 p = ast.literal_eval(json.dumps(react_json))
             except:
-                return ''
+                return ""
 
         return p
 
@@ -321,7 +320,6 @@ class Api():
 
 if __name__ == '__main__':
     api = Api()
-    api.removeAllStorage({})
     # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         'Smartcloud',
