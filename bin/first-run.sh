@@ -16,15 +16,12 @@ if : >/dev/tcp/8.8.8.8/53; then
 	# sudo apt-get install --no-install-recommends chromium-browser midori
 
 	# Install Node
-	# sudo bash /home/pi/firmware/bin/util/install-node.sh
+	# sudo bash /home/pi/firmware/bin/setup/install-node.sh
 
 	# Py dependencies
-	sudo bash /home/pi/firmware/bin/util/pip-install.sh
+	sudo bash /home/pi/firmware/bin/setup/pip-install.sh
 
 	touch /home/pi/.first_run
-
-	# This forces a reboot
-	sudo bash /home/pi/firmware/bin/util/install-display.sh
 
 else
 	echo 'Offline, not doing first run.'

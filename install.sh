@@ -49,7 +49,7 @@ sudo echo "pi:pi" > pass.txt
 sudo chpasswd < pass.txt
 
 # raspi-config
-sudo bash /home/pi/firmware/bin/util/raspi-config-setup.sh
+sudo bash /home/pi/firmware/bin/setup/raspi-config-setup.sh
 
 # Delete Raspi-config wizard
 sudo cp /etc/xdg/autostart/piwiz.desktop /home/pi/firmware
@@ -59,11 +59,21 @@ sudo rm /etc/xdg/autostart/piwiz.desktop
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
+
+
+
 # If connected to network
 if [ ! -e /home/pi/.first_run ]; then
     echo "-*- First Run -*-"
 	sudo bash /home/pi/firmware/bin/first-run.sh
 fi
+
+# Install Temp/Humidity Drivers
+bash /home/pi/firmware/bin/setup/install-temperhum.sh
+
+# Install display drivers
+# This forces a reboot
+sudo bash /home/pi/firmware/bin/setup/install-display.sh
 
 # Reboot (if display script didn't already)
 sudo reboot

@@ -303,7 +303,7 @@ class Api():
         try:
             # Use subprocess.check_output if you expect a response
             process = subprocess.check_output(
-                ["sudo", "bash", "/home/pi/firmware/bin/util/update.sh"],
+                ["sudo", "bash", "/home/pi/firmware/bin/setup/update.sh"],
                 stderr=subprocess.STDOUT
             )
 
