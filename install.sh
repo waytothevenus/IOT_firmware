@@ -14,7 +14,7 @@ fi
 # Clone repo
 sudo rm -rf /home/pi/firmware
 # TODO use main branch (CURRENTLY USING DEV)
-sudo git clone --single-branch --branch dev https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
+sudo git clone --single-branch --branch main https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
 
 sudo git -C /home/pi/firmware/ config pull.rebase false
 sudo chmod -R 755 /home/pi/firmware/bin
