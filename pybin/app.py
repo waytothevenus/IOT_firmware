@@ -15,6 +15,8 @@ import webview
 # import threading
 # import collections
 
+import ../drivers/temperhum/temperhum
+
 # TODO: Try/catch all the things
 
 """
@@ -27,6 +29,7 @@ STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 
 class Api():
+
     def _get_hw_id(self):
         # Extract serial from cpuinfo file
         hw_id = "0000000000000000"
@@ -49,6 +52,20 @@ class Api():
         except:
             ip = "error"
         return ip
+
+    def _get_temp_hum(self):
+        # Get temp/humidity from device
+        temp = "00"
+        hum = "00"
+        try:
+            result = subprocess.call("/home/pi/firmware/drivers/temperhum/temperhum.py", shell=True)
+        except:
+            temp = "ER"
+            hum = "ER"
+
+        [temp, hum] = result.split(" ")
+
+        return [temp,hum]
 
     def __init__(self):
         self.HW_ID = self._get_hw_id()
@@ -162,6 +179,28 @@ class Api():
         }
         return json.dumps(response)
 
+    def getTemperatureHumidity(self, params):
+        response = {
+            "error": 'getTemperatureHumidity Error'
+        }
+        try:
+            [temp, hum] = self._get_temp_hum()
+            if DEBUG:
+                self.log('Temperature: ' + temp +
+                         ' Humidity: ' + hum)
+
+            response = {
+                "message": {
+                    'temperature': temp,
+                    'humidity': hum,
+                }
+            }
+            return json.dumps(response)
+
+        except:
+            self.log('getTemperatureHumidity Error')
+        return response
+
     def getWifiInfo(self, params):
         response = {
             "error": 'getWifiInfo Error'
@@ -188,7 +227,7 @@ class Api():
 
         except:
             self.log('getWifiInfo Error')
-        return info
+        return response
 
     def getWifiNetworks(self, params):
         try:

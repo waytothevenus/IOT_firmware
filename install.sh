@@ -59,9 +59,6 @@ sudo rm /etc/xdg/autostart/piwiz.desktop
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
-
-
-
 # If connected to network
 if [ ! -e /home/pi/.first_run ]; then
     echo "-*- First Run -*-"
