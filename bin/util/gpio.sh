@@ -33,4 +33,4 @@ else
 fi
 
 #remove gpio instance
-echo $pin > /sys/class/gpio/unexport
+# echo $pin > /sys/class/gpio/unexport/
