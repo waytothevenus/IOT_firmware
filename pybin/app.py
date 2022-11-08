@@ -73,13 +73,8 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        if p == "":
-            response = {
-                'error': 'Error: No key provided'
-            }
-            return json.dumps(response)
-
-        if u'key' in p:
+        
+        if p != "" and  u'key' in p:
             key = p[u'key']
             try:
                 f = open(STORAGE_FILE + str(key), "r")
@@ -100,7 +95,7 @@ class Api():
                 }
         else:
             response = {
-                'message': ""
+                'error': 'Error: No key provided'
             }
         return json.dumps(response)
 
@@ -131,7 +126,7 @@ class Api():
                 self.log('Set ' + key + ': ' + data)
             except:
                 response = {
-                    'error': 'Error: Invalid params'
+                    'error': 'Error: Could not set file'
                 }
         else:
             response = {
@@ -324,61 +319,7 @@ class Api():
 
     def toggleFullscreen(self):
         webview.windows[0].toggle_fullscreen()
-
-    def deviceOn(self):
-        device = "26"
-        try:
-            # Use subprocess.check_output if you expect a response
-            process = subprocess.check_output(
-                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "1"],
-                stderr=subprocess.STDOUT
-            )
-
-            response = {
-                "message": str(process.decode("utf-8"))
-            }
-        except:
-            response = {
-                "error": 'Could not turn on device',
-            }
-        return json.dumps(response)
-
-    
-    def deviceOff(self):
-        device = "26"
-        try:
-            # Use subprocess.check_output if you expect a response
-            process = subprocess.check_output(
-                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "0"],
-                stderr=subprocess.STDOUT
-            )
-
-            response = {
-                "message": str(process.decode("utf-8"))
-            }
-        except:
-            response = {
-                "error": 'Could not turn off device',
-            }
-        return json.dumps(response)
-
-    def deviceStatus(self):
-        device = "26"
-        try:
-            # Use subprocess.check_output if you expect a response
-            process = subprocess.check_output(
-                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "read", device],
-                stderr=subprocess.STDOUT
-            )
-
-            response = {
-                "message": str(process.decode("utf-8"))
-            }
-        except:
-            response = {
-                "error": 'Could not read device status',
-            }
-        return json.dumps(response)
+        
 
     def update(self, params):
         try:

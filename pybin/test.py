@@ -89,45 +89,82 @@ class Api():
         if u'key' in p and u'data' in p:
             key = str(p[u'key'])
             data = str(p[u'data'])
-
-            # Create folder if needed
-            if not os.path.exists(TMP_DIR):
-                os.makedirs(TMP_DIR)
-            f = open(STORAGE_FILE + key, "w")
-            f.write(data)
-            f.close()
-            response = {
-                'message': 'ok'
-            }
-            self.log('Set ' + key + ': ' + data)
-
+            try:
+                # Create folder if needed
+                if not os.path.exists(TMP_DIR):
+                    os.makedirs(TMP_DIR)
+                f = open(STORAGE_FILE + key, "w")
+                f.write(data)
+                f.close()
+                response = {
+                    'message': 'ok'
+                }
+                self.log('Set ' + key + ': ' + data)
+            except:
+                response = {
+                    'error': 'Error: Invalid params'
+                }
         else:
             response = {
                 'error': 'Set Error'
             }
         return json.dumps(response)
 
-    def getTemperatureHumidity(self):
+
+    def deviceOn(self):
+        device = "26"
         try:
-            [temp, hum] = self._get_temp_hum()
-            if DEBUG:
-                self.log('Temperature: ' + temp +
-                         ' Humidity: ' + hum)
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "1"],
+                stderr=subprocess.STDOUT
+            )
 
             response = {
-                "message": {
-                    'temperature': temp,
-                    'humidity': hum,
-                }
+                "message": str(process.decode("utf-8"))
             }
-            return json.dumps(response)
-
         except:
-            self.log('getTemperatureHumidity Error')
-            errorRes = {
-                "error": 'getTemperatureHumidity Error'
+            response = {
+                "error": 'Could not turn on device',
             }
-            return json.dumps(errorRes)
+        return json.dumps(response)
+
+    
+    def deviceOff(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "0"],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not turn off device',
+            }
+        return json.dumps(response)
+
+    def deviceStatus(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "read", device],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not read device status',
+            }
+        return json.dumps(response)
 
     def log(self, text):
         print('[Cloud] %s' % text)
@@ -158,6 +195,7 @@ if __name__ == '__main__':
     print(api.set({'key': "a", 'data': "asd"}))
     print(api.get({'key': "a"}))
 
-    print(api.getTemperatureHumidity())
+    print(api.deviceOn())
+    print(api.deviceStatus())
 
 
