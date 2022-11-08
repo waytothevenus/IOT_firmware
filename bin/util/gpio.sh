@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # usage:
 # >sudo sh gpio.sh <action> <pin> <value>
 # reading example:
@@ -6,15 +8,16 @@
 # writing example:
 # >sudo sh gpio.sh write 3 1
 
-#!/bin/bash
-
 #assign parameters
 action=$1
 pin=$2
 value=$3
 
-#create gpio instance
-echo $pin > /sys/class/gpio/export
+# If pin not exported yet
+if [ ! -d "/sys/class/gpio/gpio$pin" ];then
+    #create gpio instance
+    echo $pin > /sys/class/gpio/export
+fi
 
 if [ $action = "read" ];then
   	#assign direction
@@ -31,6 +34,3 @@ elif [ $action = "write" ];then
 else
    	echo "Unknown parameter"
 fi
-
-#remove gpio instance
-# echo $pin > /sys/class/gpio/unexport/

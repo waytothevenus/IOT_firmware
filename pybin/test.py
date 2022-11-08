@@ -18,12 +18,30 @@ STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 class Api():
 
+    def _get_temp_hum(self):
+        # Get temp/humidity from device
+        temp = "00"
+        hum = "00"
+        try:
+            result = subprocess.check_output("/home/pi/firmware/drivers/temperhum/temperhum.py --nosymbols", shell=True).decode().strip()
+            [temp, hum] = result.split(" ")
+
+            if DEBUG:
+                self.log('Temp/Hum: ' + result)
+        except:
+            temp = "ER"
+            hum = "ER"
+
+        return [temp,hum]
+
+
     # get({key})
+
     def get(self, params):
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        if p == '':
+        if p == "":
             response = {
                 'error': 'Error: No key provided'
             }
@@ -31,29 +49,27 @@ class Api():
 
         if u'key' in p:
             key = p[u'key']
-            if not os.path.exists(STORAGE_FILE + str(key)):
-                open(STORAGE_FILE + str(key), 'w').close()
+            try:
+                f = open(STORAGE_FILE + str(key), "r")
+                value = f.read()
+                f.close()
+                try:
+                    response = {
+                        'message': ast.literal_eval(value)
+                    }
+                except:
+                    response = {
+                        'message': str(value)
+                    }
+            except:
+                # Not set
                 response = {
-                    'message': {'data': ''}
+                    'message': ""
                 }
-                return json.dumps(response)
-            # try:
-            # f = open(STORAGE_FILE + str(key), "r")
-            # value = f.read()
-            # f.close()
-            value = json.load(open(STORAGE_FILE + str(key), "r"))
-            self.log(value)
+        else:
             response = {
-                'message': value
+                'message': ""
             }
-            # except:
-            # response = {
-            #     'error': 'Get Error'
-            # }
-            # return json.dumps(response)
-        # response = {
-        #     'error': 'Error: Invalid key'
-        # }
         return json.dumps(response)
 
     # set({key, data})
@@ -61,7 +77,7 @@ class Api():
         if DEBUG:
             self.log(params)
         p = self.parse_react_json(params)
-        if p == '':
+        if p == "":
             response = {
                 'error': 'Error: key and value must be provided'
             }
@@ -74,11 +90,9 @@ class Api():
                 # Create folder if needed
                 if not os.path.exists(TMP_DIR):
                     os.makedirs(TMP_DIR)
-
-                json.dump({'data': data}, open(STORAGE_FILE + key, "w"))
-                # f = open(STORAGE_FILE + key, "w")
-                # f.write(json.dumps({data: data}))
-                # f.close()
+                f = open(STORAGE_FILE + key, "w")
+                f.write(data)
+                f.close()
                 response = {
                     'message': 'ok'
                 }
@@ -92,6 +106,28 @@ class Api():
                 'error': 'Set Error'
             }
         return json.dumps(response)
+
+    def getTemperatureHumidity(self, params):
+        try:
+            [temp, hum] = self._get_temp_hum()
+            if DEBUG:
+                self.log('Temperature: ' + temp +
+                         ' Humidity: ' + hum)
+
+            response = {
+                "message": {
+                    'temperature': temp,
+                    'humidity': hum,
+                }
+            }
+            return json.dumps(response)
+
+        except:
+            self.log('getTemperatureHumidity Error')
+            errorRes = {
+                "error": 'getTemperatureHumidity Error'
+            }
+            return json.dumps(errorRes)
 
     def log(self, text):
         print('[Cloud] %s' % text)
@@ -118,4 +154,10 @@ if __name__ == '__main__':
     print(api.set({'key': "asdf", 'data': 1234}))
     print(api.get({'key': "asdf"}))
     print(api.set({'key': "a", 'data': "asd"}))
+    print(api.get({'key': "a"}))
     print(api.set({'key': "a", 'data': "asd"}))
+    print(api.get({'key': "a"}))
+
+    print(api.getTemperatureHumidity())
+
+
