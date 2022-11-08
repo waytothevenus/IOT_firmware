@@ -1,3 +1,7 @@
+'''
+Todo:
+- Consistant string deliminator '/"
+'''
 import ast
 import json
 import fcntl
@@ -12,8 +16,6 @@ import sys
 import time
 import webview
 
-# import threading
-# import collections
 # TODO: Try/catch all the things
 
 """
@@ -25,8 +27,20 @@ TMP_DIR = '/home/pi/iot_tmp/'
 STORAGE_FILE = TMP_DIR + '.iot_storage_'
 
 
-class Api():
+def parse_react_json(self, react_json):
+    try:
+        p = ast.literal_eval(react_json)
+    except:
+        try:
+            p = ast.literal_eval(json.dumps(react_json))
+        except:
+            return ""
 
+    return p
+
+
+class Api():
+    # Get raspi hardware ID
     def _get_hw_id(self):
         # Extract serial from cpuinfo file
         hw_id = "0000000000000000"
@@ -39,42 +53,17 @@ class Api():
         except:
             hw_id = "ERROR000000000"
 
+        if DEBUG:
+            self.log('_get_hw_id: ' + str(hw_id))
+
         return hw_id
 
-    def _get_ip_address(self):
-        ip = '000.000.0.0'
-        try:
-            process = subprocess.check_output(["hostname", "-I"]).split()[0]
-            ip = process.decode("utf-8")
-        except:
-            ip = "error"
-        return ip
 
-    def _get_temp_hum(self):
-        # Get temp/humidity from device
-        temp = "00"
-        hum = "00"
-        try:
-            result = subprocess.check_output("/home/pi/firmware/drivers/temperhum/temperhum.py --nosymbols", shell=True).decode().strip()
-            [temp, hum] = result.split(" ")
-
-            if DEBUG:
-                self.log('Temp/Hum: ' + result)
-        except:
-            temp = "ER"
-            hum = "ER"
-
-        return [temp,hum]
-
-
-    # get({key})
-
+    # Usage: get({key})
     def get(self, params):
-        if DEBUG:
-            self.log(params)
-        p = self.parse_react_json(params)
+        p = parse_react_json(params)
         
-        if p != "" and  u'key' in p:
+        if p != "" and u'key' in p:
             key = p[u'key']
             try:
                 f = open(STORAGE_FILE + str(key), "r")
@@ -97,13 +86,16 @@ class Api():
             response = {
                 'error': 'Error: No key provided'
             }
+
+        if DEBUG:
+            self.log('get: ' + str(params) + " - " + str(response))
+
         return json.dumps(response)
 
-    # set({key, data})
+
+    # Usage: set({key, data})
     def set(self, params):
-        if DEBUG:
-            self.log(params)
-        p = self.parse_react_json(params)
+        p = parse_react_json(params)
         if p == "":
             response = {
                 'error': 'Error: key and value must be provided'
@@ -132,6 +124,10 @@ class Api():
             response = {
                 'error': 'Set Error'
             }
+
+        if DEBUG:
+            self.log('set: ' + str(params) + " - " + str(response))
+
         return json.dumps(response)
 
 
@@ -151,6 +147,11 @@ class Api():
             response = {
                 "error": 'Could not turn on device',
             }
+
+        
+        if DEBUG:
+            self.log('deviceOn: ' + str(response))
+
         return json.dumps(response)
 
     
@@ -170,7 +171,12 @@ class Api():
             response = {
                 "error": 'Could not turn off device',
             }
+
+        if DEBUG:
+            self.log('deviceOff: ' + str(response))
+
         return json.dumps(response)
+
 
     def getDeviceStatus(self):
         device = "26"
@@ -188,27 +194,41 @@ class Api():
             response = {
                 "error": 'Could not read device status',
             }
+
+        if DEBUG:
+            self.log('deviceOff: ' + str(response))
+        
         return json.dumps(response)
 
-    def getHardwareId(self, params):
+
+    def getHardwareId(self):
         response = {
             "message": self.HW_ID
         }
 
         if DEBUG:
-            self.log('HWID: ' + self.HW_ID)
+            self.log('getHardwareId: ' + str(response))
 
         return json.dumps(response)
 
-    def getIpAddress(self, params):
-        response = {
-            "message": self._get_ip_address(),
-        }
+
+    def getIpAddress(self):
+        try:
+            process = subprocess.check_output(["hostname", "-I"]).split()[0]
+            ip = process.decode("utf-8")
+            response = {
+                "message": ip,
+            }
+        except:
+            response = {
+                "error": "Could not get IP",
+            }
 
         if DEBUG:
-            self.log('IP: ' + str(response))
+            self.log('getIpAddress: ' + str(response))
 
         return json.dumps(response)
+
 
     def getRandomNumber(self, params):
         randNum = random.randint(0, 100000000)
@@ -218,12 +238,12 @@ class Api():
         }
         return json.dumps(response)
 
-    def getTemperatureHumidity(self, params):
+
+    def getTemperatureHumidity(self):
         try:
-            [temp, hum] = self._get_temp_hum()
-            if DEBUG:
-                self.log('Temperature: ' + temp +
-                         ' Humidity: ' + hum)
+            # Get temp/humidity from device
+            result = subprocess.check_output("/home/pi/firmware/drivers/temperhum/temperhum.py --nosymbols", shell=True).decode().strip()
+            [temp, hum] = result.split(" ")
 
             response = {
                 "message": {
@@ -231,19 +251,19 @@ class Api():
                     'humidity': hum,
                 }
             }
-            return json.dumps(response)
 
         except:
-            self.log('getTemperatureHumidity Error')
-            errorRes = {
+            response = {
                 "error": 'getTemperatureHumidity Error'
             }
-            return json.dumps(errorRes)
 
-    def getWifiInfo(self, params):
-        errorRes = {
-            "error": 'getWifiInfo Error'
-        }
+        if DEBUG:
+            self.log('getTemperatureHumidity: ' + str(response))
+
+        return json.dumps(response)
+
+
+    def getWifiInfo(self):
         try:
             process = subprocess.check_output(
                 ["sudo", "iwconfig", "wlan0"])
@@ -262,13 +282,19 @@ class Api():
                     'quality': groups.group(2)
                 }
             }
-            return json.dumps(response)
 
         except:
-            self.log('getWifiInfo Error')
-        return json.dumps(errorRes)
+            response = {
+                "error": 'getWifiInfo Error'
+            }
 
-    def getWifiNetworks(self, params):
+        if DEBUG:
+            self.log('getWifiInfo: ' + str(response))
+
+        return json.dumps(response)
+
+
+    def getWifiNetworks(self):
         try:
             ps = subprocess.Popen(
                 ('sudo', 'iwlist', 'wlan0', 'scan'), stdout=subprocess.PIPE)
@@ -283,13 +309,16 @@ class Api():
             response = {
                 "error": 'Could not list networks',
             }
+
+        if DEBUG:
+            self.log('getWifiInfo: ' + str(response))
+
         return json.dumps(response)
+
 
     # Connect to a wifi network
     def setWifiNetwork(self, params):
-        if DEBUG:
-            self.log(params)
-        p = self.parse_react_json(params)
+        p = parse_react_json(params)
         if p == "":
             response = {
                 "error": 'Error: No credentials provided'
@@ -312,9 +341,14 @@ class Api():
             response = {
                 "message": 'Error: Invalid credentials'
             }
+
+        if DEBUG:
+            self.log('setWifiNetwork: ' + str(params) + ' - ' + str(response))
+
         return json.dumps(response)
 
-    def checkWifiConnection(self, params):
+
+    def checkWifiConnection(self):
         try:
             process = subprocess.check_output(
                 ["sudo", "bash", "/home/pi/firmware/bin/util/check-network-curl.sh"],
@@ -332,7 +366,12 @@ class Api():
             response = {
                 "error": 'Could not connect',
             }
+
+        if DEBUG:
+            self.log('checkWifiConnection: ' + str(response))
+
         return json.dumps(response)
+
 
     def log(self, text):
         print('[Cloud] %s' % text)
@@ -341,6 +380,7 @@ class Api():
         }
         return json.dumps(response)
 
+
     def longTime(self, params):
         time.sleep(15)
         response = {
@@ -348,21 +388,8 @@ class Api():
         }
         return json.dumps(response)
 
-    def parse_react_json(self, react_json):
-        try:
-            p = ast.literal_eval(react_json)
-        except:
-            try:
-                p = ast.literal_eval(json.dumps(react_json))
-            except:
-                return ""
 
-        return p
-
-    def removeAllStorage(self, params):
-        if DEBUG:
-            self.log(params)
-
+    def removeAllStorage(self):
         try:
             os.system('find ' + TMP_DIR + ' -mindepth 1 -delete')
         except:
@@ -371,13 +398,15 @@ class Api():
         response = {
             "message": "ok"
         }
+
         return json.dumps(response)
+
 
     def toggleFullscreen(self):
         webview.windows[0].toggle_fullscreen()
 
 
-    def update(self, params):
+    def update(self):
         try:
             # Use subprocess.check_output if you expect a response
             process = subprocess.check_output(
@@ -392,6 +421,10 @@ class Api():
             response = {
                 "error": 'Could not update',
             }
+
+        if DEBUG:
+            self.log('update: ' + str(response))
+
         return json.dumps(response)
 
 
@@ -399,6 +432,7 @@ class Api():
         self.HW_ID = self._get_hw_id()
         if DEBUG:
             self.log('Initialized: ' + self.HW_ID)
+
 
     def init(self, params):
         response = {

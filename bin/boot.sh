@@ -7,7 +7,7 @@ if ! command -v git &> /dev/null
 then
     echo "-*- Install -*-"
 	sudo bash <(curl -s https://raw.githubusercontent.com/lacymorrow/iot-firmware/main/install.sh)
-	sudo reboot
+	sudo reboot -n
 fi
 
 # Update
