@@ -83,6 +83,9 @@ class Api():
             }
             return json.dumps(response)
 
+        if DEBUG:
+            self.log(p)
+
         if u'key' in p and u'data' in p:
             key = str(p[u'key'])
             data = str(p[u'data'])
@@ -99,7 +102,7 @@ class Api():
                 self.log('Set ' + key + ': ' + data)
             except:
                 response = {
-                    'error': 'Error: Invalid params'
+                    'error': 'Error: Invalid params - ' + key + ' - ' + data
                 }
         else:
             response = {
@@ -107,7 +110,7 @@ class Api():
             }
         return json.dumps(response)
 
-    def getTemperatureHumidity(self, params):
+    def getTemperatureHumidity(self):
         try:
             [temp, hum] = self._get_temp_hum()
             if DEBUG:
