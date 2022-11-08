@@ -14,9 +14,6 @@ import webview
 
 # import threading
 # import collections
-
-import /home/pi/firmware/drivers/temperhum/temperhum
-
 # TODO: Try/catch all the things
 
 """
