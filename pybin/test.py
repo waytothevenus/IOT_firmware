@@ -89,21 +89,18 @@ class Api():
         if u'key' in p and u'data' in p:
             key = str(p[u'key'])
             data = str(p[u'data'])
-            try:
-                # Create folder if needed
-                if not os.path.exists(TMP_DIR):
-                    os.makedirs(TMP_DIR)
-                f = open(STORAGE_FILE + key, "w")
-                f.write(data)
-                f.close()
-                response = {
-                    'message': 'ok'
-                }
-                self.log('Set ' + key + ': ' + data)
-            except:
-                response = {
-                    'error': 'Error: Invalid params - ' + key + ' - ' + data
-                }
+
+            # Create folder if needed
+            if not os.path.exists(TMP_DIR):
+                os.makedirs(TMP_DIR)
+            f = open(STORAGE_FILE + key, "w")
+            f.write(data)
+            f.close()
+            response = {
+                'message': 'ok'
+            }
+            self.log('Set ' + key + ': ' + data)
+
         else:
             response = {
                 'error': 'Set Error'
