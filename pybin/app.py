@@ -134,6 +134,62 @@ class Api():
             }
         return json.dumps(response)
 
+
+    def deviceOn(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "1"],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not turn on device',
+            }
+        return json.dumps(response)
+
+    
+    def deviceOff(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "0"],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not turn off device',
+            }
+        return json.dumps(response)
+
+    def getDeviceStatus(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "read", device],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not read device status',
+            }
+        return json.dumps(response)
+
     def getHardwareId(self, params):
         response = {
             "message": self.HW_ID
@@ -319,7 +375,7 @@ class Api():
 
     def toggleFullscreen(self):
         webview.windows[0].toggle_fullscreen()
-        
+
 
     def update(self, params):
         try:
