@@ -1,5 +1,5 @@
 if [[ ! -z $1 ]]; then
-	echo "Set GPIO $1 to ON!"
+	echo "Set GPIO $1 to OFF!"
     
     # Exports pin to userspace
     echo $1 > /sys/class/gpio/export                  
@@ -10,7 +10,7 @@ if [[ ! -z $1 ]]; then
     # Sets pin to high
     echo "0" > "/sys/class/gpio/gpio$1/value"
 else
-	echo "Set GPIO 26 to ON!"
+	echo "Set GPIO 26 to OFF!"
     
     # Exports pin to userspace
     echo "26" > /sys/class/gpio/export                  
