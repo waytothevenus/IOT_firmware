@@ -21,6 +21,6 @@ fi
 sleep 7
 fbcp &
 
-sudo bash /home/pi/firmware/bin/init &
+sudo bash /home/pi/firmware/bin/init &> /home/pi/firmware/log.txt
 
 exit 0
