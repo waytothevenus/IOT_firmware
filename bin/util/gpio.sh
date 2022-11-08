@@ -20,8 +20,8 @@ if [ ! -d "/sys/class/gpio/gpio$pin" ];then
 fi
 
 if [ $action = "read" ];then
-  	#assign direction
-	echo in > /sys/class/gpio/gpio$pin/direction
+  	# #assign direction
+	# echo in > /sys/class/gpio/gpio$pin/direction
   	#read gpio value
 	cat /sys/class/gpio/gpio$pin/value   	
 	
