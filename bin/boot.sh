@@ -1,4 +1,7 @@
 #!/bin/sh
+
+PYTHON="$(sudo bash /home/pi/firmware/bin/setup/check-python.sh)"
+
 # If git doesn't exist, this shouldn't even be here, but start over
 if ! command -v git &> /dev/null
 then
@@ -16,8 +19,8 @@ sudo git -C /home/pi/firmware pull
 # pip3 list | grep webview
 if [ ! -e /home/pi/.first_run ]; then
     echo "-*- First Run -*-"
-	sudo bash /home/pi/firmware/bin/first-run.sh
+	sudo bash /home/pi/firmware/bin/setup/first-run.sh
 fi
 
 echo "-*- Startup -*-"
-sudo bash /home/pi/firmware/bin/startup.sh
+sudo $PYTHON /home/pi/firmware/pybin/app.py

@@ -80,7 +80,7 @@ sudo rm /etc/xdg/autostart/piwiz.desktop
 # If connected to network
 if [ ! -e /home/pi/.first_run ]; then
     echo "-*- First Run -*-"
-	sudo bash /home/pi/firmware/bin/first-run.sh
+	sudo bash /home/pi/firmware/bin/setup/first-run.sh
 fi
 
 # Install Temp/Humidity Drivers

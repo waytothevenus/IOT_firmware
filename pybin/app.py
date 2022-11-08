@@ -67,18 +67,6 @@ class Api():
         return [temp,hum]
 
 
-    def __init__(self):
-        self.HW_ID = self._get_hw_id()
-        # self.IP_ADDRESS = self._get_ip_address()
-        if DEBUG:
-            self.log('Initialized: ' + self.HW_ID)
-
-    def init(self, params):
-        response = {
-            "message": 'Hello from Python {0}'.format(sys.version)
-        }
-        return json.dumps(response)
-
     # get({key})
 
     def get(self, params):
@@ -337,6 +325,61 @@ class Api():
     def toggleFullscreen(self):
         webview.windows[0].toggle_fullscreen()
 
+    def deviceOn(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "1"],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not turn on device',
+            }
+        return json.dumps(response)
+
+    
+    def deviceOff(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "write", device, "0"],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not turn off device',
+            }
+        return json.dumps(response)
+
+    def deviceStatus(self):
+        device = "26"
+        try:
+            # Use subprocess.check_output if you expect a response
+            process = subprocess.check_output(
+                ["sudo", "bash", "/home/pi/firmware/bin/util/gpio.sh", "read", device],
+                stderr=subprocess.STDOUT
+            )
+
+            response = {
+                "message": str(process.decode("utf-8"))
+            }
+        except:
+            response = {
+                "error": 'Could not read device status',
+            }
+        return json.dumps(response)
+
     def update(self, params):
         try:
             # Use subprocess.check_output if you expect a response
@@ -354,7 +397,17 @@ class Api():
             }
         return json.dumps(response)
 
-# wpa_cli - i wlan0 reconfigure
+
+    def __init__(self):
+        self.HW_ID = self._get_hw_id()
+        if DEBUG:
+            self.log('Initialized: ' + self.HW_ID)
+
+    def init(self, params):
+        response = {
+            "message": 'Hello from Python {0}'.format(sys.version)
+        }
+        return json.dumps(response)
 
 
 if __name__ == '__main__':
