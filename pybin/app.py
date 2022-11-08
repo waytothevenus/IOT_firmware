@@ -55,14 +55,17 @@ class Api():
         temp = "00"
         hum = "00"
         try:
-            result = subprocess.call("/home/pi/firmware/drivers/temperhum/temperhum.py", shell=True)
+            result = subprocess.check_output("/home/pi/firmware/drivers/temperhum/temperhum.py --nosymbols", shell=True).decode().strip()
+            [temp, hum] = result.split(" ")
+
+            if DEBUG:
+                self.log('Temp/Hum: ' + result)
         except:
             temp = "ER"
             hum = "ER"
 
-        [temp, hum] = result.split(" ")
-
         return [temp,hum]
+
 
     def __init__(self):
         self.HW_ID = self._get_hw_id()
@@ -177,9 +180,6 @@ class Api():
         return json.dumps(response)
 
     def getTemperatureHumidity(self, params):
-        response = {
-            "error": 'getTemperatureHumidity Error'
-        }
         try:
             [temp, hum] = self._get_temp_hum()
             if DEBUG:
@@ -196,10 +196,13 @@ class Api():
 
         except:
             self.log('getTemperatureHumidity Error')
-        return response
+            errorRes = {
+                "error": 'getTemperatureHumidity Error'
+            }
+            return json.dumps(errorRes)
 
     def getWifiInfo(self, params):
-        response = {
+        errorRes = {
             "error": 'getWifiInfo Error'
         }
         try:
@@ -224,7 +227,7 @@ class Api():
 
         except:
             self.log('getWifiInfo Error')
-        return response
+        return json.dumps(errorRes)
 
     def getWifiNetworks(self, params):
         try:
