@@ -430,8 +430,7 @@ class Api():
 
     def __init__(self):
         self.HW_ID = self._get_hw_id()
-        if DEBUG:
-            self.log('Initialized: ' + self.HW_ID)
+        self.log('Initialized Python-JS API with HardwareID: ' + self.HW_ID)
 
 
     def init(self, params):
