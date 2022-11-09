@@ -2,8 +2,6 @@
 
 echo "> Smartcloud Setup ---"
 
-
-
 # sudo systemctl enable getty@tty1.service
 # sudo apt-get update -y
 
@@ -13,7 +11,6 @@ if ! command -v git &> /dev/null
 then
 	sudo apt-get install -y git
 fi
-
 
 # Clone repo
 echo "> Delete old repo"
@@ -47,7 +44,6 @@ sudo cp -R /home/pi/firmware/root/boot /boot/
 sudo cp -R /home/pi/firmware/root/etc/default /etc/default
 
 # TODO Splashscreen
-
 # sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
 # sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
 
