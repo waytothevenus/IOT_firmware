@@ -15,8 +15,6 @@ import webview
 # import threading
 # import collections
 
-import ../drivers/temperhum/temperhum
-
 # TODO: Try/catch all the things
 
 """
@@ -58,14 +56,15 @@ class Api():
         temp = "00"
         hum = "00"
         try:
-            result = subprocess.call("/home/pi/firmware/drivers/temperhum/temperhum.py", shell=True)
+            result = subprocess.call(
+                "/home/pi/firmware/drivers/temperhum/temperhum.py", shell=True)
         except:
             temp = "ER"
             hum = "ER"
 
         [temp, hum] = result.split(" ")
 
-        return [temp,hum]
+        return [temp, hum]
 
     def __init__(self):
         self.HW_ID = self._get_hw_id()
