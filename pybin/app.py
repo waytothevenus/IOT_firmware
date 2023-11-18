@@ -176,7 +176,7 @@ class Api:
             )
 
             result = str(process.decode("utf-8"))
-
+            self.log("res" + result)
             response = {"message": "on" if result == "1" else "off"}
         except:
             response = {
