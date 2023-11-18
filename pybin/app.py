@@ -411,6 +411,8 @@ if __name__ == "__main__":
         width=480,
         height=320,
         frameless=True,
+        fullscreen=True,
+        on_top=True,
         resizable=False,
         text_select=False,
         min_size=(320, 240),
