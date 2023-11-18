@@ -82,9 +82,6 @@ sudo bash /home/pi/firmware/bin/setup/first-run.sh
 echo "> Install temp/humidity"
 bash /home/pi/firmware/bin/setup/install-temperhum.sh
 
-# Allow opening X windows by anyone
-xhost +
-
 # Install display drivers
 # This forces a reboot
 echo "> Install display"

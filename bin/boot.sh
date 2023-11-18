@@ -10,5 +10,8 @@ if [ ! -e /home/pi/.first_run ]; then
 	sudo bash /home/pi/firmware/bin/setup/first-run.sh
 fi
 
+# Allow opening X windows by anyone (allows opening windows from ssh)
+xhost +
+
 echo "-*- Startup -*-"
 sudo $PYTHON /home/pi/firmware/pybin/app.py
