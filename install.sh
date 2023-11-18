@@ -55,7 +55,6 @@ sudo cp -R /home/pi/firmware/root/etc/default /etc/default
 # echo '> Set shell permissions'
 # sudo chmod 755 -R /home/pi/firmware/bin/
 
-# TODO Change password
 # Set user password
 echo "> Set username/password"
 sudo echo "$USERNAME:$PASSWORD" > pass.txt
