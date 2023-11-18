@@ -135,7 +135,7 @@ class Api:
             }
 
         if DEBUG:
-            self.log("deviceOn: " + str(response).strip().strip())
+            self.log("deviceOn: " + str(response))
 
         return json.dumps(response)
 
@@ -162,7 +162,7 @@ class Api:
             }
 
         if DEBUG:
-            self.log("deviceOff: " + str(response).strip())
+            self.log("deviceOff: " + str(response))
 
         return json.dumps(response)
 
@@ -175,7 +175,9 @@ class Api:
                 stderr=subprocess.STDOUT,
             )
 
-            response = {"message": str(process.decode("utf-8"))}
+			result = str(process.decode("utf-8"))
+
+            response = {"message": "on" if result == "1" else "off"}
         except:
             response = {
                 "error": "Could not read device status",
