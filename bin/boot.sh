@@ -11,6 +11,7 @@ if [ ! -e /home/pi/.first_run ]; then
 fi
 
 # Allow opening X windows by anyone (allows opening windows from ssh)
+export DISPLAY=:0
 xhost +
 
 echo "-*- Startup -*-"

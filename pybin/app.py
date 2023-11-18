@@ -128,14 +128,14 @@ class Api:
                 stderr=subprocess.STDOUT,
             )
 
-            response = {"message": str(process.decode("utf-8"))}
+            response = {"message": str(process.decode("utf-8").strip())}
         except:
             response = {
                 "error": "Could not turn on device",
             }
 
         if DEBUG:
-            self.log("deviceOn: " + str(response).strip())
+            self.log("deviceOn: " + str(response).strip().strip())
 
         return json.dumps(response)
 
@@ -155,7 +155,7 @@ class Api:
                 stderr=subprocess.STDOUT,
             )
 
-            response = {"message": str(process.decode("utf-8"))}
+            response = {"message": str(process.decode("utf-8").strip())}
         except:
             response = {
                 "error": "Could not turn off device",
