@@ -225,6 +225,7 @@ class Api:
                 subprocess.check_output(
                     "/home/pi/firmware/drivers/temperhum/temperhum.py --nosymbols",
                     shell=True,
+                    sudo=True,
                 )
                 .decode()
                 .strip()

@@ -39,7 +39,9 @@ sudo touch /boot/ssh
 
 # Boot files
 echo "> Copy boot files"
-sudo mkdir -p /home/pi/.config/lxsession /home/pi/.config/lxsession/LXDE-pi 
+sudo mkdir -p /home/pi/.config/lxsession /home/pi/.config/lxsession/LXDE-pi
+
+# We no longer need to copy rc.local, we use autostart instead because it starts after the GUI is ready
 # sudo rm /etc/rc.local
 # sudo cp /home/pi/firmware/root/etc/rc.local /etc/rc.local
 
