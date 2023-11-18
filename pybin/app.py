@@ -415,7 +415,6 @@ if __name__ == "__main__":
         resizable=False,
         text_select=False,
         on_top=True,
-        zoomable=False,
         draggable=False,
         min_size=(320, 240),
         background_color="#F00"
