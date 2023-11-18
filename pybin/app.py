@@ -186,7 +186,7 @@ class Api:
         return json.dumps(response)
 
     def getHardwareId(self, params):
-        self.log("getHardwareId: " + params)
+        self.log("getHardwareId: " + json.dumps(params))
         response = {"message": self.HW_ID}
 
         if DEBUG:
