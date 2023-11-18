@@ -5,6 +5,19 @@
 echo ">Booting Smartcloud..."
 echo "-*- Init -*-"
 
+# If git doesn't exist, this shouldn't even be here, but start over
+if ! command -v git &> /dev/null
+then
+    echo "-*- Install -*-"
+	sudo bash <(curl -s https://raw.githubusercontent.com/lacymorrow/iot-firmware/main/install.sh)
+	sudo reboot -n
+fi
+
+# Update
+echo "-*- Update -*-"
+sudo git -C /home/pi/firmware pull
+
+
 sudo bash /home/pi/firmware/bin/boot.sh
 
 # # Driver setup
