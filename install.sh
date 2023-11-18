@@ -1,5 +1,8 @@
 #!/bin/sh
 
+USERNAME=pi
+PASSWORD=pi
+
 echo "> Smartcloud Setup ---"
 
 # sudo systemctl enable getty@tty1.service
@@ -15,7 +18,7 @@ fi
 # Clone repo
 echo "> Delete old repo"
 sudo rm -rf /home/pi/firmware
-# TODO use main branch (CURRENTLY USING DEV)
+
 echo "> Clone firmware"
 sudo git clone --single-branch --branch main https://github.com/lacymorrow/iot-firmware.git /home/pi/firmware
 
@@ -54,8 +57,8 @@ sudo cp -R /home/pi/firmware/root/etc/default /etc/default
 
 # TODO Change password
 # Set user password
-echo "> Set user password pi:pi"
-sudo echo "pi:pi" > pass.txt
+echo "> Set username/password"
+sudo echo "$USERNAME:$PASSWORD" > pass.txt
 sudo chpasswd < pass.txt
 sudo rm pass.txt
 
@@ -71,7 +74,7 @@ sudo rm /etc/xdg/autostart/piwiz.desktop
 # TODO REMOVE: Setup home wifi network; replace <ssid> and <password>
 # echo "> Setup wifi network"
 # sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh <ssid> <password>
-# sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
+sudo bash /home/pi/firmware/bin/util/connect-wifi-network.sh Castle homesweethome
 
 if [ ! -e /home/pi/.first_run ]; then
     echo "-*- First Run -*-"
