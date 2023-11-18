@@ -175,7 +175,7 @@ class Api:
                 stderr=subprocess.STDOUT,
             )
 
-			result = str(process.decode("utf-8"))
+            result = str(process.decode("utf-8"))
 
             response = {"message": "on" if result == "1" else "off"}
         except:
