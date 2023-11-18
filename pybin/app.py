@@ -185,8 +185,7 @@ class Api:
 
         return json.dumps(response)
 
-    def getHardwareId(self, params):
-        self.log("getHardwareId: " + json.dumps(params))
+    def getHardwareId(self):
         response = {"message": self.HW_ID}
 
         if DEBUG:
@@ -407,7 +406,7 @@ if __name__ == "__main__":
     # https: // pywebview.flowrl.com/guide/api.html  # webview-create-window
     webview.create_window(
         "Smartcloud",
-        url="/home/pi/firmware/static/index.html",
+        url="/home/pi/firmware/out/index.html",
         js_api=api,
         width=480,
         height=320,
