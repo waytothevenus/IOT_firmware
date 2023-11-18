@@ -2,7 +2,7 @@
 
 
 # Initialize hardware
-echo "Booting Smartcloud..."
+echo ">Booting Smartcloud..."
 echo "-*- Init -*-"
 
 sudo bash /home/pi/firmware/bin/boot.sh
