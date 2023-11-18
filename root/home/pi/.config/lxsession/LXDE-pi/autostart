@@ -2,5 +2,5 @@
 @pcmanfm --desktop --profile LXDE-pi
 @xscreensaver -no-splash
 @point-rpi
-@sudo /home/pi/firmware/bin/init
+@sudo bash /home/pi/firmware/bin/init > /home/pi/firmware/log.txt
 

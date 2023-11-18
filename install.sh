@@ -39,8 +39,9 @@ sudo touch /boot/ssh
 
 # Boot files
 echo "> Copy boot files"
-sudo rm /etc/rc.local
-sudo cp /home/pi/firmware/root/etc/rc.local /etc/rc.local
+sudo mkdir -p /home/pi/.config/lxsession /home/pi/.config/lxsession/LXDE-pi 
+# sudo rm /etc/rc.local
+# sudo cp /home/pi/firmware/root/etc/rc.local /etc/rc.local
 
 # Copy root directory
 sudo cp -R /home/pi/firmware/root/boot /boot/
