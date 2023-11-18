@@ -3,9 +3,8 @@ Todo:
 - Consistant string deliminator '/"
 """
 import ast
-import json
 import fcntl
-from logging import info
+import json
 import os
 import random
 import re
@@ -14,6 +13,8 @@ import struct
 import subprocess
 import sys
 import time
+from logging import info
+
 import webview
 
 # TODO: Try/catch all the things
@@ -134,7 +135,7 @@ class Api:
             }
 
         if DEBUG:
-            self.log("deviceOn: " + str(response))
+            self.log("deviceOn: " + str(response).strip())
 
         return json.dumps(response)
 
@@ -161,7 +162,7 @@ class Api:
             }
 
         if DEBUG:
-            self.log("deviceOff: " + str(response))
+            self.log("deviceOff: " + str(response).strip())
 
         return json.dumps(response)
 
