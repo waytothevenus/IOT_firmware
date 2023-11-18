@@ -3,9 +3,9 @@
 # Config after getting network
 
 if : >/dev/tcp/8.8.8.8/53; then
-	echo 'Internet available.'
+	echo '> Internet available.'
 	# Install App Dependencies
-	sudo apt-get upgrade
+	sudo apt-get upgrade -y
 	sudo apt-get update -y
 
 	# Communication
@@ -23,5 +23,5 @@ if : >/dev/tcp/8.8.8.8/53; then
 	touch /home/pi/.first_run
 
 else
-	echo 'Offline, not doing first run.'
+	echo '> Offline, not doing first run.'
 fi
