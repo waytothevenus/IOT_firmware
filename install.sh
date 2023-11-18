@@ -47,13 +47,8 @@ sudo cp -R /home/pi/firmware/root/boot /boot/
 sudo cp -R /home/pi/firmware/root/etc/default /etc/default
 
 # TODO Splashscreen
-# sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
-# sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
-
-
-# # Set Permissions
-# echo '> Set shell permissions'
-# sudo chmod 755 -R /home/pi/firmware/bin/
+sudo cp /home/pi/firmware/root/home/pi/.config/lxpanel/LXDE-pi/panels/panel /home/pi/.config/lxpanel/LXDE-pi/panels/panel
+sudo cp /home/pi/firmware/root/home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
 
 # Set user password
 echo "> Set username/password"

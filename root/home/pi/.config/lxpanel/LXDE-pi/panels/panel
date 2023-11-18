@@ -20,7 +20,7 @@ Global {
   fontcolor=#ffffff
   usefontsize=0
   background=0
-  backgroundfile=/usr/share/lxpanel/images/background.png
+  backgroundfile=/home/pi/firmware/resources/images/wallpaper.png
   iconsize=20
   monitor=0
   point_at_menu=0
