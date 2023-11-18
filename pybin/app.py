@@ -410,7 +410,6 @@ if __name__ == "__main__":
         js_api=api,
         width=480,
         height=320,
-        focus=True,
         frameless=True,
         fullscreen=True,
         resizable=False,
