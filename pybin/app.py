@@ -223,7 +223,7 @@ class Api:
             # Get temp/humidity from device
             result = (
                 subprocess.check_output(
-                    "sudo python /home/pi/firmware/drivers/temperhum/temperhum.py --nosymbols",
+                    "sudo temperhum.py --nosymbols",
                     shell=True,
                 )
                 .decode()
