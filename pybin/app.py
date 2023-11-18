@@ -411,10 +411,8 @@ if __name__ == "__main__":
         width=480,
         height=320,
         frameless=True,
-        fullscreen=True,
         resizable=False,
         text_select=False,
-        on_top=True,
         min_size=(320, 240),
         background_color="#F00"
         # url="",
