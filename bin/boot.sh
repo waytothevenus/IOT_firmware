@@ -23,4 +23,4 @@ if [ ! -e /home/pi/.first_run ]; then
 fi
 
 echo "-*- Startup -*-"
-sudo $PYTHON /home/pi/firmware/pybin/test.py
+sudo $PYTHON /home/pi/firmware/pybin/app.py
