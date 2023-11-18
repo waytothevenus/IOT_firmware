@@ -177,7 +177,7 @@ class Api:
 
             result = str(process.decode("utf-8"))
             self.log("res" + result)
-            response = {"message": "on" if result == "1" else "off"}
+            response = {"message": "on" if "1" in result else "off"}
         except:
             response = {
                 "error": "Could not read device status",
