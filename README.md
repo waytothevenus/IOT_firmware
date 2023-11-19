@@ -1,5 +1,13 @@
 # iot-firmware-boilerplate
-Raspberry Pi OS -based system
+Raspberry Pi Raspbian-based Kiosk Web system for IoT devices.
+
+Use your favorite frontend framework with your choice of backend programming to create interactive Kiosk applications that have full, native system access. A python webview is used to bridge the gap.
+
+## Features
+
+- Automatically login, update, and run your app on boot.
+- Single install script takes care of setup, installation, and drivers.
+- 
 
 ## Install
 
@@ -17,4 +25,4 @@ With a fresh Raspberry Pi running RaspberryPi OS (Raspbian):
 - Setup raspi-config
 - Enables SSH
 - Adds boot config
-- Adds boot script (`/boot/rc.local`)
+- Adds boot script (`User pi autostart`)
