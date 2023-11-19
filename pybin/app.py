@@ -224,7 +224,6 @@ class Api:
             result = (
                 subprocess.check_output(
                     ["sudo", "temperhum.py", "--nosymbols"],
-                    shell=True,
                 )
                 .decode()
                 .strip()
