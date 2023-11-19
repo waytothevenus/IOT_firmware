@@ -7,9 +7,8 @@ Use your favorite frontend framework with your choice of backend programming to 
 
 - Automatically login, update, and run your app on boot.
 - Single install script takes care of setup, installation, and drivers.
-- 
 
-## Install
+## Usage
 
 With a fresh Raspberry Pi running RaspberryPi OS (Raspbian):
 
@@ -22,7 +21,7 @@ With a fresh Raspberry Pi running RaspberryPi OS (Raspbian):
 - Clones this repo
 - Changes password to `pi` (Username is also `pi`)
 - Changes splash screen
-- Setup raspi-config
+- Setup raspi-config wifi
 - Enables SSH
-- Adds boot config
+- Adds boot config for attached display
 - Adds boot script (`User pi autostart`)
