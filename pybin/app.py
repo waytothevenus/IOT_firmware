@@ -395,6 +395,8 @@ class Api:
         return json.dumps(response)
 
     def __init__(self):
+        self.log(self.getTemperatureHumidity())
+
         self.HW_ID = self._get_hw_id()
         self.log("Initialized Python-JS API with HardwareID: " + self.HW_ID)
 
